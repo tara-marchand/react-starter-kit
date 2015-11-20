@@ -12,16 +12,14 @@
   "author": "Tara Marchand",
   "license": "ISC",
   "dependencies": {
-    "react": "^0.14.3"
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   },
   "devDependencies": {
-    "bootstrap-sass-loader": "^1.0.9",
-    "extract-text-webpack-plugin": "^0.9.1",
+    "browserify": "^12.0.1",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.7",
-    "node-sass": "^3.4.2",
-    "sass-loader": "^3.1.1",
-    "webpack": "^1.12.6",
-    "webpack-dev-server": "^1.12.1"
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.1"
   }
 }
