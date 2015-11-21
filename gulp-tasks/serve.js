@@ -7,12 +7,20 @@ var config = require('./config');
 var bundleScripts = require('./script-bundler');
 var handleErrors = require('./error-handler');
 
+/**
+ * Markup (HTML)
+ */
+
 gulp.task('serve.markup', function() {
     return gulp.src(path.join(config.paths.base.source, '/**/*.html'))
         .on('error', handleErrors)
         .pipe(gulp.dest(config.paths.base.tmp));
 });
 gulp.task('serve.markup.watch', [ 'serve.markup' ], browserSync.reload);
+
+/**
+ * Styles (CSS)
+ */
 
 gulp.task('serve.styles', function() {
     // copy bootstrap CSS
@@ -24,6 +32,10 @@ gulp.task('serve.styles', function() {
         .pipe(gulp.dest(config.paths.styles.tmp));
 });
 gulp.task('serve.styles.watch', [ 'serve.styles' ], browserSync.reload);
+
+/**
+ * Scripts (JS)
+ */
 
 gulp.task('serve.scripts.lib', function() {
     // library scripts bundle and watchify
@@ -54,6 +66,10 @@ gulp.task('serve.scripts.app', function() {
         }
     );
 });
+
+/**
+ * Overall task including markup, styles, and scripts
+ */
 
 gulp.task('serve', [ 'serve.markup', 'serve.styles', 'serve.scripts.lib', 'serve.scripts.app' ], function() {
     browserSync.init({

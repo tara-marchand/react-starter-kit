@@ -27,5 +27,6 @@ module.exports = {
             tmp: path.join(tmpBase, stylesDir)
         }
     },
-    dependencies: [ 'react', 'react-dom' ]
+    // external dependencies, to be bundled separately in "lib"
+    dependencies: [ 'react', 'react-dom', 'object-assign', 'events', 'flux' ]
 };

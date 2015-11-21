@@ -1,5 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Application = require('./components/Application.jsx');
+var Application = require('./components/App.jsx');
 
-ReactDOM.render(<Application />, document.getElementsByTagName('article')[0]);
+ReactDOM.render(<Application />, document.getElementsByClassName('app')[0]);

@@ -6,11 +6,19 @@ var config = require('./config');
 var bundleScripts = require('./script-bundler');
 var handleErrors = require('./error-handler');
 
+/**
+ * Markup (HTML)
+ */
+
 gulp.task('build.markup', function() {
     return gulp.src(path.join(config.paths.base.source, '/**/*.html'))
         .on('error', handleErrors)
         .pipe(gulp.dest(config.paths.base.build));
 });
+
+/**
+ * Styles (CSS)
+ */
 
 gulp.task('build.styles', function() {
     // copy bootstrap CSS
@@ -20,6 +28,10 @@ gulp.task('build.styles', function() {
         .pipe(postcss([ require('precss')({ /* options */ }) ]))
         .pipe(gulp.dest(config.paths.styles.build));
 });
+
+/**
+ * Scripts (JS)
+ */
 
 gulp.task('build.scripts.lib', function() {
     // library scripts bundle and watchify
@@ -49,5 +61,9 @@ gulp.task('build.scripts.app', function() {
         }
     );
 });
+
+/**
+ * Overall task including markup, styles, and scripts
+ */
 
 gulp.task('build', [ 'build.markup', 'build.styles', 'build.scripts.lib', 'build.scripts.app' ]);
