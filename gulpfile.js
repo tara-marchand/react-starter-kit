@@ -12,7 +12,7 @@ See gulp starter kit: https://github.com/greypants/gulp-starter
   when you run `gulp`.
 */
 
-var requireDir = require('require-dir')
+var requireDir = require('require-dir');
 
 // require all tasks in gulp-tasks, including subfolders
-requireDir('./gulp-tasks', { recurse: true })
+requireDir('./gulp-tasks', { recurse: true });

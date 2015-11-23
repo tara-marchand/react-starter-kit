@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var config= require('../config');
+var config= require('./config');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');

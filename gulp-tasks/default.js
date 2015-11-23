@@ -1,3 +1,3 @@
 var gulp = require('gulp');
 
-gulp.task('default', ['env-dev']);
+gulp.task('default', ['dev']);

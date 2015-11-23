@@ -1,8 +1,8 @@
 var gulp = require('gulp');
-var config = require('../config');
-var bundleScripts = require('./bundler');
+var config = require('./config');
+var bundleScripts = require('./script-bundler');
 
-gulp.task('script-lib', function() {
+gulp.task('lib', function() {
     return bundleScripts(
         {
             entries: [

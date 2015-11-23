@@ -1,8 +1,8 @@
 var gulp = require('gulp');
 var postcss = require('gulp-postcss');
-var config = require('../config');
+var config = require('./config');
 
-gulp.task('styles-app', function() {
+gulp.task('styles', function() {
     return gulp.src(config.paths.styles.source + '/app.css').pipe(
         postcss([
             require('precss')({ /* options */ })

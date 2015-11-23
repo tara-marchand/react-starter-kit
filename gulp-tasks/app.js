@@ -1,8 +1,8 @@
 var gulp = require('gulp');
-var config = require('../config');
-var bundleScripts = require('./bundler');
+var config = require('./config');
+var bundleScripts = require('./script-bundler');
 
-gulp.task('script-app', function() {
+gulp.task('app', function() {
     return bundleScripts(
         {
             bundleExternal: false,
