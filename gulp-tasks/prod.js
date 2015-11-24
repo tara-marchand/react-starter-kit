@@ -1,3 +1,3 @@
 var gulp  = require('gulp');
 
-gulp.task('prod', ['lib', 'app', 'styles']);
+gulp.task('prod', ['build']);
