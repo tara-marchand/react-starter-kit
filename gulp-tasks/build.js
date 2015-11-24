@@ -1,3 +1,4 @@
+var fs = require('fs');
 var gulp = require('gulp');
 var path = require('path');
 var postcss = require('gulp-postcss');
@@ -12,14 +13,17 @@ gulp.task('build.markup', function() {
 });
 
 gulp.task('build.styles', function() {
+    // copy bootstrap CSS
+    fs.createReadStream(path.join(config.paths.nodeModules, '/bootstrap/dist/css/bootstrap.min.css'))
+        .pipe(fs.createWriteStream(config.paths.styles.build));
     return gulp.src(path.join(config.paths.styles.source, '/**/*.css'))
         .pipe(postcss([ require('precss')({ /* options */ }) ]))
         .pipe(gulp.dest(config.paths.styles.build));
 });
 
-gulp.task('build.scripts', function() {
+gulp.task('build.scripts.lib', function() {
     // library scripts bundle and watchify
-    bundleScripts(
+    return bundleScripts(
         {
             entries: [ path.join(config.paths.nodeModules, '/react-dom/dist/react-dom.js') ]
         }, {
@@ -28,9 +32,11 @@ gulp.task('build.scripts', function() {
             isDev: false // uses browserify instead of watchify
         }
     );
+});
 
+gulp.task('build.scripts.app', function() {
     // app scripts bundle and watchify
-    bundleScripts(
+    return bundleScripts(
         {
             bundleExternal: false,
             debug: true,
@@ -44,4 +50,4 @@ gulp.task('build.scripts', function() {
     );
 });
 
-gulp.task('build', [ 'build.markup', 'build.styles', 'build.scripts' ]);
+gulp.task('build', [ 'build.markup', 'build.styles', 'build.scripts.lib', 'build.scripts.app' ]);

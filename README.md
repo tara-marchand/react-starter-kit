@@ -2,12 +2,6 @@
 
 ## Environments
 
-Development: `gulp` or `gulp dev`
+Development: `gulp` or `gulp serve` (for local server)
 
-Production: `gulp prod`
-
-## Scripts
-
-Libraries: `gulp lib`
-
-Application: `gulp app`
+Production: `gulp build` (for deployment)
