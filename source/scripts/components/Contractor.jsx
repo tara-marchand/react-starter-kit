@@ -3,7 +3,7 @@ var React = require('react');
 var Contractor = React.createClass({
 
     render: function () {
-        return <li>Contractor!</li>
+        return <li><a href={this.props.url} target="_blank">{this.props.name}</a></li>
     }
 
 });
