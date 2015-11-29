@@ -1,5 +1,6 @@
 var React = require('react');
-var ContractorList = require('./ContractorList.jsx');
+var ContractorList = require('./ContractorList');
+var AddEditContractor = require('./AddEditContractor');
 
 var Application = React.createClass({
 
@@ -12,6 +13,7 @@ var Application = React.createClass({
                         { id: 2, name: 'wilma', url: 'http://www.wilma.com/' }
                     ]}  />
                 </div>
+                <AddEditContractor />
             </div>
         </div>
     }

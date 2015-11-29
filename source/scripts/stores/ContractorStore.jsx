@@ -11,11 +11,15 @@ var CHANGE_EVENT = 'change';
 var contractors = {
     list: [
         {
+            id: 1,
             name: 'Fred',
+            initialViewState: 'display',
             url: 'http://www.fred.com/'
         },
         {
+            id: 2,
             name: 'Wilma',
+            initialViewState: 'display',
             url: 'http://www.wilma.com/'
         }
     ],
@@ -37,8 +41,18 @@ var ContractorStore = objectAssign({}, EventEmitter.prototype, {
         this.removeListener(CHANGE_EVENT, callback);
     },
 
-    getList: function() {
+    getContractors: function() {
         return contractors;
+    },
+
+    getContractorById: function(contractorId) {
+        var contractor = null;
+
+        for (var i = 0; i < contractors.list.length; i++) {
+            if (contractors.list[i].id === contractorId) {
+                return contractors.list[i];
+            }
+        }
     }
 
 });
@@ -81,6 +95,21 @@ AppDispatcher.register(function(payload) {
              */
             contractors.list.splice(action.index, 1);
             ContractorStore.emit(CHANGE_EVENT);
+            break;
+
+        case ContractorConstants.UPDATE_ITEM_VIEW_STATE:
+
+            /**
+             *  View should pass the contractor id that
+             *  needs to be updated.
+             */
+            for (var i = 0; i < contractors.list.length; i++) {
+                if (contractors.list[i].id === action.id) {
+                    contractors.list[i].viewState = action.viewState;
+                    ContractorStore.emit(CHANGE_EVENT);
+                    return;
+                }
+            }
             break;
 
         default:

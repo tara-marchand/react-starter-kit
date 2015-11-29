@@ -3,6 +3,11 @@ var ContractorStore = require('../stores/ContractorStore');
 var Contractor = require('./Contractor');
 
 var ContractorList = React.createClass({
+    getInitialState: function() {
+        return {
+            contractors: ContractorStore.getContractors()
+        }
+    },
 
     render: function () {
         var listItems = [];

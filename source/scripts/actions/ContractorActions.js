@@ -21,6 +21,13 @@ module.exports = {
             actionType: ContractorConstants.REMOVE_ITEM,
             index: index
         });
-    }
+    },
 
+    updateItemViewState: function(id, viewState) {
+        AppDispatcher.handleViewAction({
+            actionType: ContractorConstants.UPDATE_ITEM_VIEW_STATE,
+            id: id,
+            viewState: viewState
+        });
+    }
 };
