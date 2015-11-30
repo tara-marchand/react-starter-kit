@@ -8,23 +8,44 @@ var CHANGE_EVENT = 'change';
 /**
  * Define the store as an empty array.
  */
-var contractors = {
-    list: [
-        {
-            id: 1,
-            name: 'Fred',
-            initialViewState: 'display',
-            url: 'http://www.fred.com/'
-        },
-        {
-            id: 2,
-            name: 'Wilma',
-            initialViewState: 'display',
-            url: 'http://www.wilma.com/'
-        }
-    ],
-    editing: false
-};
+var contractors = [
+    {
+        id: 1,
+        name: 'Fred',
+        url: 'http://www.fred.com/'
+    },
+    {
+        id: 2,
+        name: 'Wilma',
+        url: 'http://www.wilma.com/'
+    }
+];
+
+function updateContractorViewState(action) {
+    var newViewState = '';
+console.log(action.viewState);
+    // TODO: use real logic
+    switch (action.viewState) {
+    case 'display':
+        newViewState = 'edit';
+        break;
+    case 'edit':
+        newViewState = 'display';
+        break;
+    case 'add':
+        newViewState = 'edit';
+        break;
+    default:
+        break;
+    }
+
+   for (var i = 0; i < contractors.length; i++) {
+       if (contractors[i].id === action.id) {
+           contractors[i].viewState = newViewState;
+           return;
+       }
+   }
+}
 
 /**
  * Define the public event listeners and getters that
@@ -43,16 +64,6 @@ var ContractorStore = objectAssign({}, EventEmitter.prototype, {
 
     getContractors: function() {
         return contractors;
-    },
-
-    getContractorById: function(contractorId) {
-        var contractor = null;
-
-        for (var i = 0; i < contractors.list.length; i++) {
-            if (contractors.list[i].id === contractorId) {
-                return contractors.list[i];
-            }
-        }
     }
 
 });
@@ -61,41 +72,10 @@ var ContractorStore = objectAssign({}, EventEmitter.prototype, {
  *  Register each of the actions with the dispatcher
  *  by changing the store's data and emitting a change.
  */
-AppDispatcher.register(function(payload) {
+ContractorStore.dispatcherIndex = AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.actionType) {
-
-        case ContractorConstants.NEW_ITEM:
-
-            /**
-             *  Add the data defined in the ContractorActions,
-             *  which the View will pass as a payload.
-             */
-            contractors.editing = true;
-            ContractorStore.emit(CHANGE_EVENT);
-            break;
-
-        case ContractorConstants.SAVE_ITEM:
-
-            /**
-             *  Add the data defined in the TodoActions,
-             *  which the View will pass as a payload.
-             */
-            contractors.list.push(action.text);
-            contractors.editing = false;
-            ContractorStore.emit(CHANGE_EVENT);
-            break;
-
-        case ContractorConstants.REMOVE_ITEM:
-
-            /**
-             *  View should pass the contractor index that
-             *  needs to be removed from the store.
-             */
-            contractors.list.splice(action.index, 1);
-            ContractorStore.emit(CHANGE_EVENT);
-            break;
 
         case ContractorConstants.UPDATE_ITEM_VIEW_STATE:
 
@@ -103,13 +83,8 @@ AppDispatcher.register(function(payload) {
              *  View should pass the contractor id that
              *  needs to be updated.
              */
-            for (var i = 0; i < contractors.list.length; i++) {
-                if (contractors.list[i].id === action.id) {
-                    contractors.list[i].viewState = action.viewState;
-                    ContractorStore.emit(CHANGE_EVENT);
-                    return;
-                }
-            }
+            updateContractorViewState(action);
+            ContractorStore.emit(CHANGE_EVENT);
             break;
 
         default:

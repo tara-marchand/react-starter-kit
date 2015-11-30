@@ -1,9 +1,19 @@
 var React = require('react');
+var objectAssign = require('object-assign');
+var ContractorActions = require('../actions/ContractorActions');
 var ContractorStore = require('../stores/ContractorStore');
 var Contractor = require('./Contractor');
 
 var ContractorList = React.createClass({
+
     getInitialState: function() {
+        var contractors = ContractorStore.getContractors();
+
+        // extend contractors data with display-only state values
+        contractors.map(function(contractor) {
+            contractor.viewState = 'display';
+        });
+
         return {
             contractors: ContractorStore.getContractors()
         }
@@ -11,19 +21,26 @@ var ContractorList = React.createClass({
 
     render: function () {
         var listItems = [];
+        var contractor;
 
-        for (var i = 0, contractor; i < this.props.contractors.length; i++) {
-            contractor = this.props.contractors[i];
-            listItems.push(<Contractor key={contractor.id} name={contractor.name} url={contractor.url} />);
-        }
+        var listHtml = this.state.contractors.map(function(contractor) {
+            return <Contractor key={contractor.id} contractor={contractor} />
+        });
 
-        return (
-            <ul>
-                {listItems}}
-            </ul>
-        );
+        return <ul>
+            {listHtml}
+        </ul>
+    },
+
+    componentDidMount: function() {
+        ContractorStore.addChangeListener(this.onContractorsChange);
+    },
+
+    onContractorsChange: function() {
+        this.setState({
+            contractors: ContractorStore.getContractors()
+        })
     }
-
 });
 
 module.exports = ContractorList;

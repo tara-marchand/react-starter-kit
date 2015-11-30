@@ -1,36 +1,21 @@
 var React = require('react');
-var ContractorStore = require('../stores/ContractorStore');
 var ContractorActions = require('../actions/ContractorActions');
+var ContractorStore = require('../stores/ContractorStore');
 
 var Contractor = React.createClass({
-    getInitialState: function () {
-        return {
-            viewState: 'display'
-        }
-    },
 
     render: function () {
         return <li>
-            <a href={this.props.url} target="_blank" onClick={this.updateViewState}>{this.props.name} - {this.state.viewState}</a>
+            <a href={this.props.contractor.url} target="_blank" onClick={this.updateItemViewState}>
+                {this.props.contractor.name} - {this.props.contractor.viewState}
+            </a>
         </li>
     },
 
-    updateViewState: function(e) {
+    updateItemViewState: function(e) {
         e.preventDefault();
 
-        var newViewState = '';
-
-        // TODO: use real logic
-        switch (this.state.viewState) {
-        case 'display':
-            newViewState = 'edit';
-            break;
-        case 'edit':
-            newViewState = 'display';
-        case 'add':
-            newViewState = 'edit';
-        }
-        ContractorActions.updateItemViewState(this.props.id, newViewState);
+        ContractorActions.updateItemViewState(this.props.contractor.id, this.props.contractor.viewState);
     }
 
 });
