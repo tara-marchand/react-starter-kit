@@ -8,9 +8,12 @@ var Application = React.createClass({
         return <div className="container-fluid">
             <div className="row">
                 <div className="col-md-12">
-                    <ContractorList />
+                    <div className="panel panel-default">
+                        <div className="panel-heading">Contractors</div>
+                        <ContractorList />
+                        <AddEditContractor />
+                    </div>
                 </div>
-                <AddEditContractor />
             </div>
         </div>
     }

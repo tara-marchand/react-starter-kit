@@ -27,9 +27,11 @@ var ContractorList = React.createClass({
             return <Contractor key={contractor.id} contractor={contractor} />
         });
 
-        return <ul>
-            {listHtml}
-        </ul>
+        return <div className="panel-body">
+            <ul className="list-group">
+                {listHtml}
+            </ul>
+        </div>
     },
 
     componentDidMount: function() {

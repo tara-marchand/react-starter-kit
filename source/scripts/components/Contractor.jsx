@@ -5,7 +5,7 @@ var ContractorStore = require('../stores/ContractorStore');
 var Contractor = React.createClass({
 
     render: function () {
-        return <li>
+        return <li className="list-group-item">
             <a href={this.props.contractor.url} target="_blank" onClick={this.updateItemViewState}>
                 {this.props.contractor.name} - {this.props.contractor.viewState}
             </a>

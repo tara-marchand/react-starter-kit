@@ -23,7 +23,7 @@ gulp.task('build.markup', function() {
 gulp.task('build.styles', function() {
     // copy bootstrap CSS
     fs.createReadStream(path.join(config.paths.nodeModules, '/bootstrap/dist/css/bootstrap.min.css'))
-        .pipe(fs.createWriteStream(config.paths.styles.build));
+        .pipe(fs.createWriteStream((path.join(config.paths.styles.build, 'bootstrap.min.css'))));
     return gulp.src(path.join(config.paths.styles.source, '/**/*.css'))
         .pipe(postcss([ require('precss')({ /* options */ }) ]))
         .pipe(gulp.dest(config.paths.styles.build));
