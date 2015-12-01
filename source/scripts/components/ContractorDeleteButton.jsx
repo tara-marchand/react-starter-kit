@@ -6,12 +6,13 @@ var Button = require('./Button');
  */
 var ContractorDeleteButton = React.createClass({
 
-    handleClick: function() {
-        var onClick = this.props.onClick;
+    propTypes: {
+        onClick: React.PropTypes.func.isRequired,
+        text: React.PropTypes.string.isRequired
+    },
 
-        if (onClick) {
-            onClick();
-        }
+    handleClick: function() {
+        this.props.onClick();
     },
 
     render: function () {

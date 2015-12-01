@@ -4,10 +4,14 @@ var Button = require('./Button');
 
 var AddEditContractor = React.createClass({
 
+    handleClick: function() {
+        return;
+    },
+
     render: function () {
         return <div className="panel-footer">
             <TextInput placeholder="New contractor name" />
-            <Button text="Add" />
+        <Button text="Add" onClick={this.handleClick} />
         </div>
     }
 
