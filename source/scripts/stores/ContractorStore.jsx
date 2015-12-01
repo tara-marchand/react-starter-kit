@@ -21,10 +21,18 @@ var contractors = [
     }
 ];
 
+function getContractorById(id) {
+    for (var i = 0; i < contractors.length; i++) {
+        if (contractors[i].id === id) {
+            return contractors[i];
+        }
+    }
+}
+
 function updateContractorViewState(action) {
     var newViewState = '';
-console.log(action.viewState);
-    // TODO: use real logic
+    var contractor = null;
+
     switch (action.viewState) {
     case 'display':
         newViewState = 'edit';
@@ -39,12 +47,22 @@ console.log(action.viewState);
         break;
     }
 
-   for (var i = 0; i < contractors.length; i++) {
-       if (contractors[i].id === action.id) {
-           contractors[i].viewState = newViewState;
-           return;
-       }
-   }
+    contractor = getContractorById(action.id);
+    contractor.viewState = newViewState;
+}
+
+function deleteContractor(id) {
+    var i = contractors.length;
+
+    /**
+     * Iterate through contractors in reverse, as items' index #s change
+     * after splicing. See: http://bit.ly/1LJSgX0
+     */
+    for (var i = contractors.length -1; i >= 0 ; i--) {
+        if (contractors[i].id === id) {
+            contractors.splice(i, 1);
+        }
+    }
 }
 
 /**
@@ -77,13 +95,19 @@ ContractorStore.dispatcherIndex = AppDispatcher.register(function(payload) {
 
     switch(action.actionType) {
 
-        case ContractorConstants.UPDATE_ITEM_VIEW_STATE:
-
+        case ContractorConstants.UPDATE_CONTRACTOR_VIEW_STATE:
             /**
-             *  View should pass the contractor id that
-             *  needs to be updated.
+             *  View should pass contractor id & current viewState via action.
              */
             updateContractorViewState(action);
+            ContractorStore.emit(CHANGE_EVENT);
+            break;
+
+        case ContractorConstants.DELETE_CONTRACTOR:
+            /**
+             *  View should pass contractor id via action.
+             */
+            deleteContractor(action.id);
             ContractorStore.emit(CHANGE_EVENT);
             break;
 

@@ -1,2 +1,23 @@
-body {
+.contractor-list {
+
+    li {
+
+        a {
+            display: inline-block;
+
+            &.display {
+                color: green;
+            }
+
+            &.edit {
+                color: blue;
+            }
+
+            &.add {
+                color: orange;
+            }
+
+        }
+
+    }
 }

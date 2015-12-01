@@ -28,7 +28,7 @@ var ContractorList = React.createClass({
         });
 
         return <div className="panel-body">
-            <ul className="list-group">
+            <ul className="list-group contractor-list">
                 {listHtml}
             </ul>
         </div>
