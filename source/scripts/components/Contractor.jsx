@@ -1,7 +1,5 @@
 var React = require('react');
 var ContractorActions = require('../actions/ContractorActions');
-var ContractorStore = require('../stores/ContractorStore');
-var ContractorDeleteButton = require('./ContractorDeleteButton');
 var Button = require('./Button');
 
 var Contractor = React.createClass({
@@ -16,22 +14,19 @@ var Contractor = React.createClass({
     },
 
     render: function () {
+        var dispatch = this.props.dispatch;
+
         return <li className="list-group-item">
-            <a href={this.props.contractor.url} target="_blank" onClick={this.updateViewState} className={this.props.contractor.viewState}>
-                {this.props.contractor.name}
+            <a href={this.props.contractor.url}
+                target="_blank"
+                onClick={this.props.handleNameClick}
+                className={this.props.contractor.viewState}>
+                    {this.props.contractor.name}
             </a>
-            <ContractorDeleteButton text="Delete" onClick={this.deleteThis} />
+            <Button text="Delete"
+                onClick={this.props.handleDeleteButtonClick}
+            />
         </li>
-    },
-
-    updateViewState: function(e) {
-        e.preventDefault();
-
-        ContractorActions.updateContractorViewState(this.props.contractor.id, this.props.contractor.viewState);
-    },
-
-    deleteThis: function() {
-        ContractorActions.deleteContractor(this.props.contractor.id);
     }
 
 });

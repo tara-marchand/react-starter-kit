@@ -56,7 +56,7 @@ gulp.task('serve.scripts.app', function() {
         {
             bundleExternal: false,
             debug: true,
-            entries: [ path.join(config.paths.scripts.source, '/app.js') ],
+            entries: [ path.join(config.paths.scripts.source, '/index.jsx') ],
             external: config.dependencies
         }, {
             browserSync: browserSync,

@@ -5,7 +5,10 @@
     },
 
     "ecmaFeatures": {
-        "jsx": true
+        "defaultParams": true,
+        "jsx": true,
+        "objectLiteralShorthandMethods": true,
+        "objectLiteralShorthandProperties": true
     },
 
     "plugins": [

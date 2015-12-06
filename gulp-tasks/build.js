@@ -37,7 +37,10 @@ gulp.task('build.scripts.lib', function() {
     // library scripts bundle and watchify
     return bundleScripts(
         {
-            entries: [ path.join(config.paths.nodeModules, '/react-dom/dist/react-dom.js') ]
+            entries: [
+                path.join(config.paths.nodeModules, '/react-dom/dist/react-dom.js'),
+                path.join(config.paths.nodeModules, '/react-redux/dist/react-redux.js')
+            ]
         }, {
             name: 'lib.js',
             dest: config.paths.scripts.build,
@@ -52,7 +55,7 @@ gulp.task('build.scripts.app', function() {
         {
             bundleExternal: false,
             debug: true,
-            entries: [ path.join(config.paths.scripts.source, '/app.js') ],
+            entries: [ path.join(config.paths.scripts.source, '/index.jsx') ],
             external: config.dependencies
         }, {
             dest: config.paths.scripts.build,

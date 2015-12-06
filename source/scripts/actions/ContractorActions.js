@@ -1,21 +1,24 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var ContractorConstants = require('../constants/ContractorConstants');
+var ContractorActionTypes = require('../constants/ContractorActionTypes');
 
 module.exports = {
 
     updateContractorViewState: function(id, viewState) {
-        AppDispatcher.handleViewAction({
-            actionType: ContractorConstants.UPDATE_CONTRACTOR_VIEW_STATE,
+        return {
+            type: ContractorActionTypes.UPDATE_CONTRACTOR_VIEW_STATE,
             id: id,
             viewState: viewState
-        });
+        };
     },
 
     deleteContractor: function(id, viewState) {
-        AppDispatcher.handleViewAction({
-            actionType: ContractorConstants.DELETE_CONTRACTOR,
+        return {
+            type: ContractorActionTypes.DELETE_CONTRACTOR,
             id: id
-        });
+        };
+    },
+
+    addContractor: function() {
+        return {};
     }
 
 };

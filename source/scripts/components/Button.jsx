@@ -7,15 +7,8 @@ var Button = React.createClass({
         text: React.PropTypes.string.isRequired
     },
 
-    /**
-     * Check whether handler was specfied in props, and if so, execute it.
-     */
-    handleClick: function() {
-        this.props.onClick();
-    },
-
     render: function () {
-        return <button onClick={this.handleClick}>{this.props.text}</button>
+        return <button onClick={this.props.onClick}>{this.props.text}</button>
     }
 
 });
