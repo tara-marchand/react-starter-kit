@@ -14,8 +14,6 @@ var Contractor = React.createClass({
     },
 
     render: function () {
-        var dispatch = this.props.dispatch;
-
         return <li className="list-group-item">
             <a href={this.props.contractor.url}
                 target="_blank"

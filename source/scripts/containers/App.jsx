@@ -6,23 +6,43 @@ var AddEditContractor = require('../components/AddEditContractor');
 
 var Application = React.createClass({
 
+    /**
+     * Value for index is passed from grandchild: Contractor -> ContractorList -> App
+     */
+    handleNameClick: function (index, e) {
+        e.preventDefault();
+        this.props.dispatch(ContractorActions.updateContractorViewState(index));
+    },
+
+    /**
+     * Value for index is passed from grandchild: Contractor -> ContractorList -> App
+     */
+    handleDeleteButtonClick: function (index, e) {
+        e.preventDefault();
+        this.props.dispatch(ContractorActions.deleteContractor(index));
+    },
+
+    handleAddButtonClick: function () {
+        //console.log('handleAddButtonClick');
+    },
+
     render: function () {
         /**
          * `this.props` is injected by `connect` call.
          */
         var dispatch = this.props.dispatch;
         var contractors = this.props.contractors;
-console.log(typeof dispatch(ContractorActions.deleteContractor(this.props.contractor.id)));
+
         return <div className="container-fluid">
             <div className="row">
                 <div className="col-md-12">
                     <div className="panel panel-default">
                         <div className="panel-heading">Contractors</div>
                         <ContractorList contractors={contractors}
-                            handleNameClick="dispatch(ContractorActions.updateContractorViewState(this.props.contractor.id, this.props.contractor.viewState))"
-                            handleDeleteButtonClick="dispatch(ContractorActions.deleteContractor(this.props.contractor.id))"
+                            handleNameClick={this.handleNameClick}
+                            handleDeleteButtonClick={this.handleDeleteButtonClick}
                         />
-                    <AddEditContractor handleAddButtonClick="dispatch(ContractorActions.addContractor())" />
+                    <AddEditContractor handleAddButtonClick={this.handleAddButtonClick} />
                     </div>
                 </div>
             </div>

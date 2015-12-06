@@ -5,26 +5,19 @@ var Contractor = require('./Contractor');
 var ContractorList = React.createClass({
 
     render: function () {
-        var listItems = [];
-        var contractor;
-
-        return
-            {
-                this.props.contractors.map(
+        return <div className="panel-body">
+            <ul className="list-group contractor-list">
+                {this.props.contractors.map(
                     function(contractor, index) {
                         return <Contractor key={index}
                             contractor={contractor}
-                            handleNameClick={this.props.handleNameClick}
-                            handleDeleteButtonClick={this.props.handleDeleteButtonClick}
+                            handleNameClick={this.props.handleNameClick.bind(null, index)}
+                            handleDeleteButtonClick={this.props.handleDeleteButtonClick.bind(null, index)}
                         />
-                    }
-                )
-            }
-            <div className="panel-body">
-                <ul className="list-group contractor-list">
-                    {listHtml}
-                </ul>
-            </div>
+                }, this)}
+            </ul>
+        </div>
+
     }
 
 });

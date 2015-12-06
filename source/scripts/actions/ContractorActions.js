@@ -2,18 +2,17 @@ var ContractorActionTypes = require('../constants/ContractorActionTypes');
 
 module.exports = {
 
-    updateContractorViewState: function(id, viewState) {
+    updateContractorViewState: function(index) {
         return {
             type: ContractorActionTypes.UPDATE_CONTRACTOR_VIEW_STATE,
-            id: id,
-            viewState: viewState
+            index: index
         };
     },
 
-    deleteContractor: function(id, viewState) {
+    deleteContractor: function(index) {
         return {
             type: ContractorActionTypes.DELETE_CONTRACTOR,
-            id: id
+            index: index
         };
     },
 

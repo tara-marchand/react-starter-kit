@@ -26,8 +26,9 @@ function contractors(state = defaultState.contractors, action) {
     switch (action.type) {
 
         case ContractorActionTypes.UPDATE_CONTRACTOR_VIEW_STATE:
+            var newViewState = state[action.index].viewState;
 
-            switch (action.viewState) {
+            switch (state[action.index].viewState) {
                 case 'display':
                     newViewState = 'edit';
                 break;
@@ -38,41 +39,33 @@ function contractors(state = defaultState.contractors, action) {
                     newViewState = 'edit';
                     break;
                 default:
-                    newViewState = action.viewState;
+                    newViewState = state[action.index].viewState;
                 break;
             }
 
-            for (var i = 0; i < state.contractors.length; i++) {
-                if (state.contractors[i].id === id) {
-                    /**
-                     * Return new array that concatenates original array...
-                     * 1. up to target item,
-                     * 2. target item, updated (combine original and updated into new object),
-                     * 3. from next after target item to end.
-                     */
-                    return [].concat(
-                        state.contractors.slice(0, i),
-                        objectAssign({}, contractors[i], { viewState: newViewState }),
-                        state.contractors.slice(i + 1)
-                    );
-                }
-            }
+            /**
+             * Return new array that concatenates original array...
+             * 1. up to target item,
+             * 2. target item, updated (combine original and updated into new object),
+             * 3. from next after target item to end.
+             */
+            return [].concat(
+                state.slice(0, action.index),
+                objectAssign({}, state[action.index], { viewState: newViewState }),
+                state.slice(action.index + 1)
+            )
 
         case ContractorActionTypes.DELETE_CONTRACTOR:
-            for (var i = state.length - 1; i >= 0 ; i--) {
-                if (state[i].id === action.id) {
-                    /**
-                     * Return new array that concatenates original array
-                     * without target item...
-                     * 1. up to target item,
-                     * 2. from next after target item to end.
-                     */
-                    return [].concat(
-                        state.slice(0, i),
-                        state.slice(i + 1)
-                    );
-                }
-            }
+            /**
+             * Return new array that concatenates original array
+             * without target item...
+             * 1. up to target item,
+             * 2. from next after target item to end.
+             */
+            return [].concat(
+                state.slice(0, action.index),
+                state.slice(action.index + 1)
+            );
 
         /**
          * Default is to do nothing and return original state.
