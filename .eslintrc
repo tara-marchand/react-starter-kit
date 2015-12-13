@@ -5,6 +5,7 @@
     },
 
     "ecmaFeatures": {
+        "arrowFunctions": true,
         "defaultParams": true,
         "jsx": true,
         "objectLiteralShorthandMethods": true,

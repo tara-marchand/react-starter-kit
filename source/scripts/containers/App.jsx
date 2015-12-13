@@ -26,6 +26,19 @@ var Application = React.createClass({
         //console.log('handleAddButtonClick');
     },
 
+    handleLoadContractorsClick: function () {
+        this.props.dispatch(ContractorActions.fetchContractors());
+    },
+
+    componentDidMount() {
+        this.props.dispatch(ContractorActions.fetchContractorsIfNeeded());
+    },
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        // this.props.dispatch(ContractorActions.fetchContractorsIfNeeded());
+    },
+
     render: function () {
         /**
          * `this.props` is injected by `connect` call.
@@ -41,6 +54,7 @@ var Application = React.createClass({
                         <ContractorList contractors={contractors}
                             handleNameClick={this.handleNameClick}
                             handleDeleteButtonClick={this.handleDeleteButtonClick}
+                            handleLoadContractorsClick={this.handleLoadContractorsClick}
                         />
                     <AddEditContractor handleAddButtonClick={this.handleAddButtonClick} />
                     </div>
@@ -55,7 +69,7 @@ var Application = React.createClass({
 /**
  * Which props do we want to inject?
  */
-function select(state) {
+function mapStateToProps(state) {
     return {
         contractors: state.contractors
     };
@@ -64,4 +78,4 @@ function select(state) {
 /**
  * Wrap the component to inject dispatch and state into it.
  */
-module.exports = ReactRedux.connect(select)(Application);
+module.exports = ReactRedux.connect()(Application);

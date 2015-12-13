@@ -2,33 +2,17 @@ var ContractorActionTypes = require('../constants/ContractorActionTypes');
 var Redux = require('redux');
 var objectAssign = require('object-assign');
 
-/**
- * Define the store.
- */
-var defaultState = {
-    contractors: [
-        {
-            id: 1,
-            name: 'Fred',
-            url: 'http://www.fred.com/',
-            viewState: 'display'
-        },
-        {
-            id: 2,
-            name: 'Wilma',
-            url: 'http://www.wilma.com/',
-            viewState: 'display'
-        }
-    ]
-};
+function contractors(state = {
+        isFetching: false,
+        contractors: []
+    }, action) {
 
-function contractors(state = defaultState.contractors, action) {
     switch (action.type) {
 
         case ContractorActionTypes.UPDATE_CONTRACTOR_VIEW_STATE:
-            var newViewState = state[action.index].viewState;
+            var newViewState = state.contractors[action.index].viewState;
 
-            switch (state[action.index].viewState) {
+            switch (state.contractors[action.index].viewState) {
                 case 'display':
                     newViewState = 'edit';
                 break;
@@ -50,9 +34,9 @@ function contractors(state = defaultState.contractors, action) {
              * 3. from next after target item to end.
              */
             return [].concat(
-                state.slice(0, action.index),
-                objectAssign({}, state[action.index], { viewState: newViewState }),
-                state.slice(action.index + 1)
+                state.contractors.slice(0, action.index),
+                objectAssign({}, state.contractors[action.index], { viewState: newViewState }),
+                state.contractors.slice(action.index + 1)
             )
 
         case ContractorActionTypes.DELETE_CONTRACTOR:
@@ -63,9 +47,21 @@ function contractors(state = defaultState.contractors, action) {
              * 2. from next after target item to end.
              */
             return [].concat(
-                state.slice(0, action.index),
-                state.slice(action.index + 1)
+                state.contractors.slice(0, action.index),
+                state.contractors.slice(action.index + 1)
             );
+
+        case ContractorActionTypes.REQUEST_CONTRACTORS:
+            return objectAssign({}, state, {
+                isFetching: true
+            });
+
+        case ContractorActionTypes.RECEIVE_CONTRACTORS:
+            return objectAssign({}, state, {
+                isFetching: false,
+                contractors: action.contractors,
+                lastUpdated: action.receivedAt
+            });
 
         /**
          * Default is to do nothing and return original state.

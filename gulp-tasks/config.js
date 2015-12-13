@@ -28,5 +28,5 @@ module.exports = {
         }
     },
     // external dependencies, to be bundled separately in "lib"
-    dependencies: [ 'react', 'react-dom', 'object-assign', 'redux', 'react-redux' ]
+    dependencies: [ 'react', 'react-dom', 'object-assign', 'redux', 'react-redux', 'redux-thunk', 'firebase' ]
 };
