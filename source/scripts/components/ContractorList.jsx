@@ -3,16 +3,14 @@ var objectAssign = require('object-assign');
 var Contractor = require('./Contractor');
 var Button = require('./Button');
 var ContractorActions = require('../actions/ContractorActions');
+var Spinner = require('./Spinner');
 
 var ContractorList = React.createClass({
-
-    componentWillUpdate: function(nextProps, nextState) {
-        console.log(nextProps);
-    },
 
     render: function () {
        if (this.props.contractors) {
             var contractorsMarkup = [];
+            var spinnerMarkup = '';
 
             for (var id in this.props.contractors) {
                 if (this.props.contractors.hasOwnProperty(id)) {
@@ -26,18 +24,19 @@ var ContractorList = React.createClass({
                 }
             }
 
+            if (this.props.isFetching) {
+                spinnerMarkup = <Spinner isFetching={this.props.isFetching} />;
+            } else {
+                spinnerMarkup = '';
+            }
+
             return <div className="panel-body">
+                {spinnerMarkup}
                 <ul className="list-group contractor-list">
                     {contractorsMarkup}
                 </ul>
-                <Button text="Load Contractors" onClick={this.props.handleLoadContractorsClick} />
             </div>
        }
-
-        return <div>
-            <p>No contractors yet.</p>
-            <Button text="Load Contractors" onClick={this.props.handleLoadContractorsClick} />
-        </div>
     }
 
 });

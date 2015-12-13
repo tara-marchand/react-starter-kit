@@ -6,10 +6,10 @@ var Contractor = React.createClass({
 
     propTypes: {
         contractor: React.PropTypes.shape({
-            id: React.PropTypes.number.isRequired,
+            id: React.PropTypes.string.isRequired,
             name: React.PropTypes.string.isRequired,
             url: React.PropTypes.string,
-            viewState: React.PropTypes.oneOf(['display', 'edit', 'add']).isRequired
+            viewState: React.PropTypes.oneOf(['display', 'edit', 'add'])
         }).isRequired
     },
 

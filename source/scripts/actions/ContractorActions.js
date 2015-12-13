@@ -35,26 +35,6 @@ contractorActions.fetchContractors = function () {
     }
 };
 
-function shouldFetchContractors(state) {
-    var contractors = state.contractors;
-
-    if (!contractors) {
-        return true;
-    } else if (contractors.isFetching) {
-        return false;
-    }// else {
-        //return contractors.didInvalidate;
-    //}
-}
-
-contractorActions.fetchContractorsIfNeeded = function() {
-    return function (dispatch, getState) {
-        if (shouldFetchContractors(getState())) {
-            return dispatch(contractorActions.fetchContractors());
-        }
-    }
-}
-
 contractorActions.updateContractorViewState = function(index) {
     return {
         type: ContractorActionTypes.UPDATE_CONTRACTOR_VIEW_STATE,
@@ -62,10 +42,10 @@ contractorActions.updateContractorViewState = function(index) {
     };
 };
 
-contractorActions.deleteContractor = function(index) {
+contractorActions.deleteContractor = function(id) {
     return {
         type: ContractorActionTypes.DELETE_CONTRACTOR,
-        index: index
+        id: id
     };
 };
 

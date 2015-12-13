@@ -11,27 +11,44 @@ var handleErrors = require('./error-handler');
  * Markup (HTML)
  */
 
-gulp.task('serve.markup', function() {
+function copyHtml (arguments) {
     return gulp.src(path.join(config.paths.base.source, '/**/*.html'))
         .on('error', handleErrors)
         .pipe(gulp.dest(config.paths.base.tmp));
+}
+
+gulp.task('serve.markup', function() {
+    return copyHtml();
 });
-gulp.task('serve.markup.watch', [ 'serve.markup' ], browserSync.reload);
+
+gulp.task('serve.markup.watch', function() {
+    return copyHtml().pipe(browserSync.stream());
+});
 
 /**
  * Styles (CSS)
  */
 
-gulp.task('serve.styles', function() {
-    // copy bootstrap CSS
+function copyBootstrapCss () {
     fs.createReadStream(path.join(config.paths.nodeModules, '/bootstrap/dist/css/bootstrap.min.css'))
         .pipe(fs.createWriteStream(path.join(config.paths.styles.tmp, 'bootstrap.min.css')));
-    // compile our CSS
+}
+
+function compileCss() {
     return gulp.src(path.join(config.paths.styles.source, '/**/*.css'))
         .pipe(postcss([ require('precss')({ /* options */ }) ]))
         .pipe(gulp.dest(config.paths.styles.tmp));
+}
+
+gulp.task('serve.styles', function() {
+    copyBootstrapCss();
+    return compileCss();
 });
-gulp.task('serve.styles.watch', [ 'serve.styles' ], browserSync.reload);
+
+gulp.task('serve.styles.watch', function() {
+    copyBootstrapCss();
+    return compileCss().pipe(browserSync.stream());
+});
 
 /**
  * Scripts (JS)

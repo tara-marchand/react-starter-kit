@@ -1,18 +1,34 @@
+var _ = require('lodash');
+var objectAssign = require('object-assign');
 var ContractorActionTypes = require('../constants/ContractorActionTypes');
 var Redux = require('redux');
-var objectAssign = require('object-assign');
 
-function contractors(state = {
-        isFetching: false,
-        contractors: []
-    }, action) {
+function isFetching (state = false, action) {
+
+    switch (action.type) {
+
+        case ContractorActionTypes.REQUEST_CONTRACTORS:
+            return true;
+
+        case ContractorActionTypes.RECEIVE_CONTRACTORS:
+            return false;
+
+        default:
+            return state;
+    }
+}
+
+/**
+ * Reducer name refers to property in state it manages (e.g., `state.contractors`).
+ */
+function contractors(state = {}, action) {
 
     switch (action.type) {
 
         case ContractorActionTypes.UPDATE_CONTRACTOR_VIEW_STATE:
-            var newViewState = state.contractors[action.index].viewState;
+            var newViewState = state[action.index].viewState;
 
-            switch (state.contractors[action.index].viewState) {
+            switch (state[action.index].viewState) {
                 case 'display':
                     newViewState = 'edit';
                 break;
@@ -34,34 +50,19 @@ function contractors(state = {
              * 3. from next after target item to end.
              */
             return [].concat(
-                state.contractors.slice(0, action.index),
-                objectAssign({}, state.contractors[action.index], { viewState: newViewState }),
-                state.contractors.slice(action.index + 1)
+                state.slice(0, action.index),
+                objectAssign({}, state[action.index], { viewState: newViewState }),
+                state.slice(action.index + 1)
             )
 
         case ContractorActionTypes.DELETE_CONTRACTOR:
             /**
-             * Return new array that concatenates original array
-             * without target item...
-             * 1. up to target item,
-             * 2. from next after target item to end.
+             * Return new contractors object w/out contractor w/id.
              */
-            return [].concat(
-                state.contractors.slice(0, action.index),
-                state.contractors.slice(action.index + 1)
-            );
-
-        case ContractorActionTypes.REQUEST_CONTRACTORS:
-            return objectAssign({}, state, {
-                isFetching: true
-            });
+            return _.reject(state, { id: action.id });
 
         case ContractorActionTypes.RECEIVE_CONTRACTORS:
-            return objectAssign({}, state, {
-                isFetching: false,
-                contractors: action.contractors,
-                lastUpdated: action.receivedAt
-            });
+            return objectAssign({}, state, action.contractors);
 
         /**
          * Default is to do nothing and return original state.
@@ -76,5 +77,6 @@ function contractors(state = {
  * according to their keys and combines their results into a single object again.
  */
 module.exports = Redux.combineReducers({
+    isFetching,
     contractors
 });

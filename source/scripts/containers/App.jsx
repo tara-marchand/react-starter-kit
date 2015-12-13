@@ -7,6 +7,10 @@ var AddEditContractor = require('../components/AddEditContractor');
 var Application = React.createClass({
 
     /**
+     * -- Event handlers --
+     */
+
+    /**
      * Value for index is passed from grandchild: Contractor -> ContractorList -> App
      */
     handleNameClick: function (index, e) {
@@ -26,17 +30,12 @@ var Application = React.createClass({
         //console.log('handleAddButtonClick');
     },
 
-    handleLoadContractorsClick: function () {
+    /**
+     * -- Lifecycle methods --
+     */
+
+    componentWillMount() {
         this.props.dispatch(ContractorActions.fetchContractors());
-    },
-
-    componentDidMount() {
-        this.props.dispatch(ContractorActions.fetchContractorsIfNeeded());
-    },
-
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-        // this.props.dispatch(ContractorActions.fetchContractorsIfNeeded());
     },
 
     render: function () {
@@ -52,9 +51,9 @@ var Application = React.createClass({
                     <div className="panel panel-default">
                         <div className="panel-heading">Contractors</div>
                         <ContractorList contractors={contractors}
+                            isFetching={this.props.isFetching}
                             handleNameClick={this.handleNameClick}
                             handleDeleteButtonClick={this.handleDeleteButtonClick}
-                            handleLoadContractorsClick={this.handleLoadContractorsClick}
                         />
                     <AddEditContractor handleAddButtonClick={this.handleAddButtonClick} />
                     </div>
@@ -71,11 +70,12 @@ var Application = React.createClass({
  */
 function mapStateToProps(state) {
     return {
-        contractors: state.contractors
+        contractors: state.contractors,
+        isFetching: false
     };
 }
 
 /**
  * Wrap the component to inject dispatch and state into it.
  */
-module.exports = ReactRedux.connect()(Application);
+module.exports = ReactRedux.connect(mapStateToProps)(Application);
