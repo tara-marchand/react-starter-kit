@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactRedux = require('react-redux');
-var ContractorActions = require('../actions/ContractorActions');
+var FirebaseActions = require('../actions/firebase');
+var ContractorActions = require('../actions/contractors');
 var ContractorList = require('../components/ContractorList');
 var AddEditContractor = require('../components/AddEditContractor');
 
@@ -35,7 +36,7 @@ var Application = React.createClass({
      */
 
     componentWillMount() {
-        this.props.dispatch(ContractorActions.fetchContractors());
+        this.props.dispatch(FirebaseActions.setRefUrl('https://tmarchand-contractors.firebaseio.com/'));
     },
 
     render: function () {
@@ -43,15 +44,14 @@ var Application = React.createClass({
          * `this.props` is injected by `connect` call.
          */
         var dispatch = this.props.dispatch;
-        var contractors = this.props.contractors;
 
         return <div className="container-fluid">
             <div className="row">
                 <div className="col-md-12">
                     <div className="panel panel-default">
                         <div className="panel-heading">Contractors</div>
-                        <ContractorList contractors={contractors}
-                            isFetching={this.props.isFetching}
+                        <ContractorList contractors={this.props.contractors}
+                            isFetching={this.props.firebase.isFetching}
                             handleNameClick={this.handleNameClick}
                             handleDeleteButtonClick={this.handleDeleteButtonClick}
                         />
@@ -71,7 +71,7 @@ var Application = React.createClass({
 function mapStateToProps(state) {
     return {
         contractors: state.contractors,
-        isFetching: false
+        firebase: state.firebase
     };
 }
 

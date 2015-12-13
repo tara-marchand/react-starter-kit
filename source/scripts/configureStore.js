@@ -1,6 +1,6 @@
 var Redux = require('redux');
 var Thunk = require('redux-thunk');
-var ContractorReducers = require('./reducers/ContractorReducers');
+var rootReducer = require('./reducers');
 
 /**
  * Create a store that has redux-thunk middleware enabled.
@@ -12,7 +12,7 @@ var createStoreWithMiddleware = Redux.applyMiddleware(
 var initialState = {};
 
 var configureStore = function (initialState) {
-    return createStoreWithMiddleware(ContractorReducers, initialState);
+    return createStoreWithMiddleware(rootReducer, initialState);
 };
 
 module.exports = configureStore;

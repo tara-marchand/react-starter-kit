@@ -1,8 +1,8 @@
 var React = require('react');
 var objectAssign = require('object-assign');
+var ContractorActions = require('../actions/contractors');
 var Contractor = require('./Contractor');
 var Button = require('./Button');
-var ContractorActions = require('../actions/ContractorActions');
 var Spinner = require('./Spinner');
 
 var ContractorList = React.createClass({

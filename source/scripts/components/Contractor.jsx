@@ -1,5 +1,5 @@
 var React = require('react');
-var ContractorActions = require('../actions/ContractorActions');
+var ContractorActions = require('../actions/contractors');
 var Button = require('./Button');
 
 var Contractor = React.createClass({
