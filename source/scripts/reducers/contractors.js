@@ -1,8 +1,9 @@
+var _ = require('lodash');
 var objectAssign = require('object-assign');
 var Redux = require('redux');
 var ContractorActionTypes = require('../constants/ContractorActionTypes');
 
-module.exports = function(state = {}, action) {
+function contractors(state = {}, action) {
 
     switch (action.type) {
 
@@ -57,3 +58,5 @@ module.exports = function(state = {}, action) {
     }
 
 };
+
+module.exports = contractors;

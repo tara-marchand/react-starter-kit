@@ -9,7 +9,6 @@ var createStoreWithMiddleware = Redux.applyMiddleware(
     Thunk
 )(Redux.createStore);
 
-var initialState = {};
 
 var configureStore = function (initialState) {
     return createStoreWithMiddleware(rootReducer, initialState);

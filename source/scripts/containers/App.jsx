@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactRedux = require('react-redux');
-var FirebaseActions = require('../actions/firebase');
-var ContractorActions = require('../actions/contractors');
+var firebaseActions = require('../actions/firebase');
+var contractorActions = require('../actions/contractors');
 var ContractorList = require('../components/ContractorList');
 var AddEditContractor = require('../components/AddEditContractor');
 
@@ -16,7 +16,7 @@ var Application = React.createClass({
      */
     handleNameClick: function (index, e) {
         e.preventDefault();
-        this.props.dispatch(ContractorActions.updateContractorViewState(index));
+        this.props.dispatch(contractorActions.updateContractorViewState(index));
     },
 
     /**
@@ -24,7 +24,7 @@ var Application = React.createClass({
      */
     handleDeleteButtonClick: function (index, e) {
         e.preventDefault();
-        this.props.dispatch(ContractorActions.deleteContractor(index));
+        this.props.dispatch(contractorActions.deleteContractor(index));
     },
 
     handleAddButtonClick: function () {
@@ -35,8 +35,9 @@ var Application = React.createClass({
      * -- Lifecycle methods --
      */
 
-    componentWillMount() {
-        this.props.dispatch(FirebaseActions.setRefUrl('https://tmarchand-contractors.firebaseio.com/'));
+    componentDidMount: function() {
+        this.props.dispatch(firebaseActions.setRefUrl('https://tmarchand-contractors.firebaseio.com/'));
+        this.props.dispatch(contractorActions.listenForFirebaseChanges());
     },
 
     render: function () {
@@ -45,21 +46,23 @@ var Application = React.createClass({
          */
         var dispatch = this.props.dispatch;
 
-        return <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-12">
-                    <div className="panel panel-default">
-                        <div className="panel-heading">Contractors</div>
-                        <ContractorList contractors={this.props.contractors}
-                            isFetching={this.props.firebase.isFetching}
-                            handleNameClick={this.handleNameClick}
-                            handleDeleteButtonClick={this.handleDeleteButtonClick}
-                        />
-                    <AddEditContractor handleAddButtonClick={this.handleAddButtonClick} />
+        return (
+            <div className='container-fluid'>
+                <div className='row'>
+                    <div className='col-md-12'>
+                        <div className='panel panel-default'>
+                            <div className='panel-heading'>Contractors</div>
+                            <ContractorList contractors={this.props.contractors}
+                                firebase={this.props.firebase}
+                                handleNameClick={this.handleNameClick}
+                                handleDeleteButtonClick={this.handleDeleteButtonClick}
+                            />
+                        <AddEditContractor handleAddButtonClick={this.handleAddButtonClick} />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        );
     }
 
 });

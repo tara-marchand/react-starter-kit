@@ -24,8 +24,8 @@ var ContractorList = React.createClass({
                 }
             }
 
-            if (this.props.isFetching) {
-                spinnerMarkup = <Spinner isFetching={this.props.isFetching} />;
+            if (this.props.firebase.isFetching) {
+                spinnerMarkup = <Spinner isFetching={this.props.firebase.isFetching} />;
             } else {
                 spinnerMarkup = '';
             }

@@ -16,8 +16,10 @@ contractorActions.updateLocalState = function(contractors) {
  * Start listening to Firebase changes.
  */
 contractorActions.listenForFirebaseChanges = function() {
-    return function (dispatch) {
-        new Firebase(getState().firebase.url).child('contractors').on('value', function (snapshot) {
+    return function (dispatch, getState) {
+        var firebaseRef = new Firebase(getState().firebase.url);
+
+        firebaseRef.child('contractors').on('value', function (snapshot) {
             dispatch(contractorActions.updateLocalState(snapshot.val()));
         });
     }

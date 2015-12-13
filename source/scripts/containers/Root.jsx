@@ -1,6 +1,8 @@
 var React = require('react');
 var Provider = require('react-redux').Provider;
 var configureStore = require('../configureStore');
+var firebaseActions = require('../actions/firebase');
+var contractorActions = require('../actions/contractors');
 var App = require('./App');
 
 /**
@@ -10,7 +12,7 @@ var App = require('./App');
 var store = configureStore();
 
 var Root = React.createClass({
-    render() {
+    render: function() {
       return (
         <Provider store={store}>
           <App />

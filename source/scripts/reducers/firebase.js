@@ -2,7 +2,7 @@ var objectAssign = require('object-assign');
 var Redux = require('redux');
 var FirebaseActionTypes = require('../constants/FirebaseActionTypes');
 
-module.exports = function(state = {}, action) {
+function firebase(state = {}, action) {
 
     switch (action.type) {
 
@@ -21,3 +21,5 @@ module.exports = function(state = {}, action) {
     }
 
 };
+
+module.exports = firebase;

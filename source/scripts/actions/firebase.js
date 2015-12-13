@@ -9,3 +9,17 @@ firebaseActions.setRefUrl = function (url) {
         url: url
     }
 };
+
+firebaseActions.requestData = function () {
+    return {
+        type: FirebaseActionTypes.FIREBASE_REQUEST_DATA
+    }
+};
+
+firebaseActions.receiveData = function (url) {
+    return {
+        type: FirebaseActionTypes.FIREBASE_RECEIVE_DATA
+    }
+};
+
+module.exports = firebaseActions;
