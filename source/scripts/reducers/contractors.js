@@ -2,6 +2,7 @@ var _ = require('lodash');
 var objectAssign = require('object-assign');
 var Redux = require('redux');
 var ContractorActionTypes = require('../constants/ContractorActionTypes');
+var FIREBASE_URL = require('../constants/ApiUrls').FIREBASE;
 
 function contractors(state = {}, action) {
 
@@ -11,9 +12,11 @@ function contractors(state = {}, action) {
             return objectAssign({}, state, action.contractors);
 
         case ContractorActionTypes.UPDATE_CONTRACTOR_VIEW_STATE:
-            var newViewState = state[action.id].viewState;
+            var viewState = state[action.id].viewState;
+            var newViewState = viewState;
+            var firebaseRef;
 
-            switch (state[action.index].viewState) {
+            switch (viewState) {
                 case 'display':
                     newViewState = 'edit';
                 break;
@@ -24,7 +27,7 @@ function contractors(state = {}, action) {
                     newViewState = 'edit';
                     break;
                 default:
-                    newViewState = state[action.id].viewState;
+                    newViewState = viewState;
                 break;
             }
 
@@ -34,11 +37,10 @@ function contractors(state = {}, action) {
              * 2. target item, updated (combine original and updated into new object),
              * 3. from next after target item to end.
              */
-            return [].concat(
-                state.slice(0, action.id),
-                objectAssign({}, state[action.id], { viewState: newViewState }),
-                state.slice(action.id + 1)
-            )
+            firebaseRef = new Firebase(FIREBASE_URL);
+            firebaseRef.child('contractors').child(action.id).child('viewState').set(newViewState);
+
+            return state;
 
         case ContractorActionTypes.DELETE_CONTRACTOR:
             /**

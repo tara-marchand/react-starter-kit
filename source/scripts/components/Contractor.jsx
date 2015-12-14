@@ -13,6 +13,12 @@ var Contractor = React.createClass({
         }).isRequired
     },
 
+    getDefaultProps: function() {
+        return {
+            viewState: 'display'
+        };
+    },
+
     render: function () {
         return <li className="list-group-item">
             <a href={this.props.contractor.url}

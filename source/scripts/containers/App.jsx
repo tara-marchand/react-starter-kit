@@ -14,9 +14,9 @@ var Application = React.createClass({
     /**
      * Value for index is passed from grandchild: Contractor -> ContractorList -> App
      */
-    handleNameClick: function (index, e) {
+    handleNameClick: function (id, e) {
         e.preventDefault();
-        this.props.dispatch(contractorActions.updateContractorViewState(index));
+        this.props.dispatch(contractorActions.updateContractorViewState(id));
     },
 
     /**
@@ -36,7 +36,6 @@ var Application = React.createClass({
      */
 
     componentDidMount: function() {
-        this.props.dispatch(firebaseActions.setRefUrl('https://tmarchand-contractors.firebaseio.com/'));
         this.props.dispatch(contractorActions.listenForFirebaseChanges());
     },
 
