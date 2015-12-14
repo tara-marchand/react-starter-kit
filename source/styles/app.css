@@ -1,3 +1,9 @@
+@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+
+body {
+    background-color: blue;
+}
+
 @-moz-keyframes heartbeat-loader {
     0% {
         -moz-transform: rotate(45deg) scale(1);
