@@ -58,6 +58,7 @@ gulp.task('serve.scripts.lib', function() {
     // library scripts bundle and watchify
     return bundleScripts(
         {
+            fullPaths: true,
             require: config.dependencies
         }, {
             name: 'lib.js',
