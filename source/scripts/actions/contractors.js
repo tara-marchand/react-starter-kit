@@ -1,4 +1,5 @@
 var ContractorActionTypes = require('../constants/ContractorActionTypes');
+var FIREBASE_URL = require('../constants/ApiUrls').FIREBASE;
 
 var contractorActions = {};
 
@@ -17,7 +18,7 @@ contractorActions.updateLocalState = function(contractors) {
  */
 contractorActions.listenForFirebaseChanges = function() {
     return function (dispatch, getState) {
-        var firebaseRef = new Firebase(getState().firebase.url);
+        var firebaseRef = new Firebase(FIREBASE_URL);
 
         firebaseRef.child('contractors').on('value', function (snapshot) {
             dispatch(contractorActions.updateLocalState(snapshot.val()));
@@ -30,7 +31,7 @@ contractorActions.listenForFirebaseChanges = function() {
  */
 contractorActions.saveStateToFirebase = function(contractors) {
     return function (dispatch) {
-        new Firebase(getState().firebase.url).child('contractors').set(contractors);
+        new Firebase(FIREBASE_URL).child('contractors').set(contractors);
         // no need for dispatch, it will trigger Firebase `value`, which will dispatch `updateLocalState`
     }
 };
@@ -38,7 +39,7 @@ contractorActions.saveStateToFirebase = function(contractors) {
 contractorActions.updateContractorViewState = function(id) {
     return {
         type: ContractorActionTypes.UPDATE_CONTRACTOR_VIEW_STATE,
-        index: id
+        id: id
     };
 };
 
