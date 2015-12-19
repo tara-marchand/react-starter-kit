@@ -1,22 +1,22 @@
 import React from 'react';
 import objectAssign from 'object-assign';
-import ContractorActions from '../actions/contractors';
-import Contractor from './Contractor';
+import DoctorActions from '../actions/doctors';
+import Doctor from './Doctor';
 import Button from './Button';
 import Spinner from './Spinner';
 
-class ContractorList extends React.Component {
+class DoctorList extends React.Component {
     render() {
-       if (this.props.contractors) {
-            var contractorsMarkup = [];
+       if (this.props.doctors) {
+            var doctorsMarkup = [];
             var spinnerMarkup = '';
 
-            for (var id in this.props.contractors) {
-                if (this.props.contractors.hasOwnProperty(id)) {
-                    var contractor = this.props.contractors[id];
+            for (var id in this.props.doctors) {
+                if (this.props.doctors.hasOwnProperty(id)) {
+                    var doctor = this.props.doctors[id];
 
-                    contractorsMarkup.push(<Contractor key={id}
-                        contractor={contractor}
+                    doctorsMarkup.push(<Doctor key={id}
+                        doctor={doctor}
                         handleNameClick={this.props.handleNameClick.bind(null, id)}
                         handleDeleteButtonClick={this.props.handleDeleteButtonClick.bind(null, id)}
                     />);
@@ -31,12 +31,12 @@ class ContractorList extends React.Component {
 
             return <div className="panel-body">
                 {spinnerMarkup}
-                <ul className="list-group contractor-list">
-                    {contractorsMarkup}
+                <ul className="list-group doctor-list">
+                    {doctorsMarkup}
                 </ul>
             </div>
        }
     }
 }
 
-export default ContractorList;
+export default DoctorList;

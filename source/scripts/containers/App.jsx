@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import firebaseActions from '../actions/firebase';
-import contractorActions from '../actions/contractors';
-import ContractorList from '../components/ContractorList';
-import AddEditContractor from '../components/AddEditContractor';
+import doctorActions from '../actions/doctors';
+import DoctorList from '../components/DoctorList';
+import AddEditDoctor from '../components/AddEditDoctor';
 
 class Application extends React.Component {
     constructor() {
@@ -18,19 +18,19 @@ class Application extends React.Component {
      */
 
     /**
-     * Value for index is passed from grandchild: Contractor -> ContractorList -> App
+     * Value for index is passed from grandchild: Doctor -> DoctorList -> App
      */
     handleNameClick(id, e) {
         e.preventDefault();
-        this.props.dispatch(contractorActions.updateContractorViewState(id));
+        this.props.dispatch(doctorActions.updateDoctorViewState(id));
     }
 
     /**
-     * Value for index is passed from grandchild: Contractor -> ContractorList -> App
+     * Value for index is passed from grandchild: Doctor -> DoctorList -> App
      */
     handleDeleteButtonClick(index, e) {
         e.preventDefault();
-        this.props.dispatch(contractorActions.deleteContractor(index));
+        this.props.dispatch(doctorActions.deleteDoctor(index));
     }
 
     handleAddButtonClick() {
@@ -42,7 +42,7 @@ class Application extends React.Component {
      */
 
     componentDidMount() {
-        this.props.dispatch(contractorActions.listenForFirebaseChanges());
+        this.props.dispatch(doctorActions.listenForFirebaseChanges());
     }
 
     render() {
@@ -56,13 +56,13 @@ class Application extends React.Component {
                 <div className='row'>
                     <div className='col-md-12'>
                         <div className='panel panel-default'>
-                            <div className='panel-heading'>Contractors!</div>
-                            <ContractorList contractors={this.props.contractors}
+                            <div className='panel-heading'>Doctors!</div>
+                            <DoctorList doctors={this.props.doctors}
                                 firebase={this.props.firebase}
                                 handleNameClick={this.handleNameClick}
                                 handleDeleteButtonClick={this.handleDeleteButtonClick}
                             />
-                        <AddEditContractor handleAddButtonClick={this.handleAddButtonClick} />
+                        <AddEditDoctor handleAddButtonClick={this.handleAddButtonClick} />
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@ class Application extends React.Component {
  */
 function mapStateToProps(state) {
     return {
-        contractors: state.contractors,
+        doctors: state.doctors,
         firebase: state.firebase
     };
 }

@@ -1,17 +1,17 @@
 import _ from 'lodash';
 import objectAssign from 'object-assign';
 import Redux from 'redux';
-import ContractorActionTypes from '../constants/ContractorActionTypes';
+import DoctorActionTypes from '../constants/DoctorActionTypes';
 import urls from '../constants/ApiUrls';
 
-function contractors(state = {}, action) {
+function doctors(state = {}, action) {
 
     switch (action.type) {
 
-        case ContractorActionTypes.UPDATE_LOCAL_STATE:
-            return objectAssign({}, state, action.contractors);
+        case DoctorActionTypes.UPDATE_LOCAL_STATE:
+            return objectAssign({}, state, action.doctors);
 
-        case ContractorActionTypes.UPDATE_CONTRACTOR_VIEW_STATE:
+        case DoctorActionTypes.UPDATE_DOCTOR_VIEW_STATE:
             var viewState = state[action.id].viewState;
             var newViewState = viewState;
             var firebaseRef;
@@ -42,13 +42,13 @@ function contractors(state = {}, action) {
 
             return state;
 
-        case ContractorActionTypes.DELETE_CONTRACTOR:
+        case DoctorActionTypes.DELETE_DOCTOR:
             /**
-             * Return new contractors object w/out contractor w/id.
+             * Return new doctors object w/out doctor w/id.
              */
             return _.reject(state, { id: action.id });
 
-        case ContractorActionTypes.ADD_CONTRACTOR:
+        case DoctorActionTypes.ADD_DOCTOR:
             return state;
 
         /**
@@ -61,4 +61,4 @@ function contractors(state = {}, action) {
 
 };
 
-export default contractors;
+export default doctors;
