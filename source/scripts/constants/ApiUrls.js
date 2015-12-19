@@ -1,5 +1,5 @@
 var urls = {
-    FIREBASE: 'https://tmarchand-contractors.firebaseio.com/'
+    FIREBASE: 'https://dh-find-a-doctor.firebaseio.com/'
 };
 
 export default urls;
