@@ -1,7 +1,12 @@
-var testdom = require('testdom')('<html><body></body></html>');
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
-var expect = require('chai').expect;
+import {
+    React,
+    sinon,
+    assert,
+    expect,
+    TestUtils
+} from '../test_helper';
+
+import VeryFirstDiv from '../../source/scripts/components/Test.jsx';
 
 describe('empty test', function() {
 
@@ -10,7 +15,6 @@ describe('empty test', function() {
     });
 
     it('should contain text: Lovely! Here it is - my very first React component!', function() {
-        var VeryFirstDiv = require('../../source/scripts/components/Test.jsx');
         var myDiv = TestUtils.renderIntoDocument(
             <VeryFirstDiv />
         );
