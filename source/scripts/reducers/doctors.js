@@ -38,7 +38,7 @@ function doctors(state = {}, action) {
              * 3. from next after target item to end.
              */
             firebaseRef = new Firebase(urls.FIREBASE);
-            firebaseRef.child('contractors').child(action.id).child('viewState').set(newViewState);
+            firebaseRef.child('doctors').child(action.id).child('viewState').set(newViewState);
 
             return state;
 
