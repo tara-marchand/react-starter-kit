@@ -29,10 +29,10 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        new ExtractTextPlugin('styles/app.css', {
-            publicPath: '/styles/',
-            allChunks: true
-        }),
+        // new ExtractTextPlugin('styles/app.css', {
+        //     publicPath: '/styles/',
+        //     allChunks: true
+        // }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'source/index.html',
@@ -49,7 +49,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!resolve-url!sass-loader?sourceMap')
+                loader: 'style-loader!css-loader!resolve-url!sass-loader?sourceMap'
             },
             {
                 test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
