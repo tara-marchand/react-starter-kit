@@ -1,5 +1,5 @@
-var ContractorActionTypes = require('../constants/ContractorActionTypes');
-var FIREBASE_URL = require('../constants/ApiUrls').FIREBASE;
+import ContractorActionTypes from '../constants/ContractorActionTypes';
+import urls from '../constants/ApiUrls';
 
 var contractorActions = {};
 
@@ -18,7 +18,7 @@ contractorActions.updateLocalState = function(contractors) {
  */
 contractorActions.listenForFirebaseChanges = function() {
     return function (dispatch, getState) {
-        var firebaseRef = new Firebase(FIREBASE_URL);
+        var firebaseRef = new Firebase(urls.FIREBASE);
 
         firebaseRef.child('contractors').on('value', function (snapshot) {
             dispatch(contractorActions.updateLocalState(snapshot.val()));
@@ -57,4 +57,4 @@ contractorActions.addContractor = function(id) {
     };
 };
 
-module.exports = contractorActions;
+export default contractorActions;

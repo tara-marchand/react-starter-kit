@@ -1,9 +1,9 @@
-var React = require('react');
-var Provider = require('react-redux').Provider;
-var configureStore = require('../configureStore');
-var firebaseActions = require('../actions/firebase');
-var contractorActions = require('../actions/contractors');
-var App = require('./App');
+import React from 'react';
+import { Provider } from 'react-redux';
+import configureStore from '../configureStore';
+import firebaseActions from '../actions/firebase';
+import contractorActions from '../actions/contractors';
+import App from './App';
 
 /**
  * Calls method to create store with initial state, with reducers
@@ -11,14 +11,14 @@ var App = require('./App');
  */
 var store = configureStore();
 
-var Root = React.createClass({
-    render: function() {
+class Root extends React.Component {
+    render() {
       return (
         <Provider store={store}>
           <App />
         </Provider>
       )
     }
-});
+}
 
-module.exports = Root;
+export default Root;

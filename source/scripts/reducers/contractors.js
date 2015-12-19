@@ -1,8 +1,8 @@
-var _ = require('lodash');
-var objectAssign = require('object-assign');
-var Redux = require('redux');
-var ContractorActionTypes = require('../constants/ContractorActionTypes');
-var FIREBASE_URL = require('../constants/ApiUrls').FIREBASE;
+import _ from 'lodash';
+import objectAssign from 'object-assign';
+import Redux from 'redux';
+import ContractorActionTypes from '../constants/ContractorActionTypes';
+import urls from '../constants/ApiUrls';
 
 function contractors(state = {}, action) {
 
@@ -37,7 +37,7 @@ function contractors(state = {}, action) {
              * 2. target item, updated (combine original and updated into new object),
              * 3. from next after target item to end.
              */
-            firebaseRef = new Firebase(FIREBASE_URL);
+            firebaseRef = new Firebase(urls.FIREBASE);
             firebaseRef.child('contractors').child(action.id).child('viewState').set(newViewState);
 
             return state;
@@ -61,4 +61,4 @@ function contractors(state = {}, action) {
 
 };
 
-module.exports = contractors;
+export default contractors;

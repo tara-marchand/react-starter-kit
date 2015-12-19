@@ -1,16 +1,14 @@
-var React = require('react');
+import React from 'react';
 
-var TextInput = React.createClass({
-
-    propTypes: {
-        placeholder: React.PropTypes.string,
-        value: React.PropTypes.string
-    },
-
-    render: function () {
+class TextInput extends React.Component {
+    render() {
         return <input type="text" placeholder={this.props.placeholder} value={this.props.value} />
     }
+}
 
-});
+TextInput.propTypes = {
+    placeholder: React.PropTypes.string,
+    value: React.PropTypes.string
+};
 
-module.exports = TextInput;
+export default TextInput;

@@ -1,13 +1,12 @@
-var React = require('react');
-var objectAssign = require('object-assign');
-var ContractorActions = require('../actions/contractors');
-var Contractor = require('./Contractor');
-var Button = require('./Button');
-var Spinner = require('./Spinner');
+import React from 'react';
+import objectAssign from 'object-assign';
+import ContractorActions from '../actions/contractors';
+import Contractor from './Contractor';
+import Button from './Button';
+import Spinner from './Spinner';
 
-var ContractorList = React.createClass({
-
-    render: function () {
+class ContractorList extends React.Component {
+    render() {
        if (this.props.contractors) {
             var contractorsMarkup = [];
             var spinnerMarkup = '';
@@ -38,7 +37,6 @@ var ContractorList = React.createClass({
             </div>
        }
     }
+}
 
-});
-
-module.exports = ContractorList;
+export default ContractorList;

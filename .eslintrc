@@ -1,15 +1,9 @@
 {
+    "parser": "babel-eslint",
     "rules": {
+        "strict": 0,
         "no-underscore-dangle": 0,
         "quotes": [2, "single"]
-    },
-
-    "ecmaFeatures": {
-        "arrowFunctions": true,
-        "defaultParams": true,
-        "jsx": true,
-        "objectLiteralShorthandMethods": true,
-        "objectLiteralShorthandProperties": true
     },
 
     "plugins": [
