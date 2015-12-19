@@ -1,25 +1,9 @@
-var React = require('react');
-var ContractorActions = require('../actions/contractors');
-var Button = require('./Button');
+import React from 'react';
+import ContractorActions from '../actions/contractors';
+import Button from './Button';
 
-var Contractor = React.createClass({
-
-    propTypes: {
-        contractor: React.PropTypes.shape({
-            id: React.PropTypes.string.isRequired,
-            name: React.PropTypes.string.isRequired,
-            url: React.PropTypes.string,
-            viewState: React.PropTypes.oneOf(['display', 'edit', 'add'])
-        }).isRequired
-    },
-
-    getDefaultProps: function() {
-        return {
-            viewState: 'display'
-        };
-    },
-
-    render: function () {
+class Contractor extends React.Component {
+    render() {
         return <li className="list-group-item">
             <a href={this.props.contractor.url}
                 target="_blank"
@@ -32,7 +16,19 @@ var Contractor = React.createClass({
             />
         </li>
     }
+}
 
-});
+Contractor.propTypes = {
+    contractor: React.PropTypes.shape({
+        id: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string.isRequired,
+        url: React.PropTypes.string,
+        viewState: React.PropTypes.oneOf(['display', 'edit', 'add'])
+    }).isRequired
+};
 
-module.exports = Contractor;
+Contractor.defaultProps = {
+    viewState: 'display'
+};
+
+export default Contractor;

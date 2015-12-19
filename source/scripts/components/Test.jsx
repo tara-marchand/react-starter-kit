@@ -1,13 +1,13 @@
-var React = require('react');
+import React from 'react';
 
-var VeryFirstDiv = React.createClass ({
-  render: function() {
+class VeryFirstDiv extends React.Component {
+  render() {
     return (
       <div className="veryFirstDiv">
         <span>Lovely! Here it is - my very first React component!</span>
       </div>
     );
   }
-});
+}
 
-module.exports = VeryFirstDiv;
+export default VeryFirstDiv;

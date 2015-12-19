@@ -1,10 +1,9 @@
-var React = require('react');
-var ReactTransitionGroup = require('react-addons-transition-group');
-var classnames = require('classnames');
+import React from 'react';
+import ReactTransitionGroup from 'react-addons-transition-group';
+import classnames from 'classnames';
 
-var spinner = React.createClass({
-
-    render: function() {
+class spinner extends React.Component {
+    render() {
         var hideClass = (!this.props.isFetching) ?  ' hide' : '';
 
         return (
@@ -13,7 +12,6 @@ var spinner = React.createClass({
             </ReactTransitionGroup>
         )
     }
+}
 
-});
-
-module.exports = spinner;
+export default spinner;

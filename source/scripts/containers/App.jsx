@@ -1,11 +1,17 @@
-var React = require('react');
-var ReactRedux = require('react-redux');
-var firebaseActions = require('../actions/firebase');
-var contractorActions = require('../actions/contractors');
-var ContractorList = require('../components/ContractorList');
-var AddEditContractor = require('../components/AddEditContractor');
+import React from 'react';
+import { connect } from 'react-redux';
+import firebaseActions from '../actions/firebase';
+import contractorActions from '../actions/contractors';
+import ContractorList from '../components/ContractorList';
+import AddEditContractor from '../components/AddEditContractor';
 
-var Application = React.createClass({
+class Application extends React.Component {
+    constructor() {
+        super();
+        this.handleNameClick = this.handleNameClick.bind(this);
+        this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
+        this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
+    }
 
     /**
      * -- Event handlers --
@@ -14,32 +20,32 @@ var Application = React.createClass({
     /**
      * Value for index is passed from grandchild: Contractor -> ContractorList -> App
      */
-    handleNameClick: function (id, e) {
+    handleNameClick(id, e) {
         e.preventDefault();
         this.props.dispatch(contractorActions.updateContractorViewState(id));
-    },
+    }
 
     /**
      * Value for index is passed from grandchild: Contractor -> ContractorList -> App
      */
-    handleDeleteButtonClick: function (index, e) {
+    handleDeleteButtonClick(index, e) {
         e.preventDefault();
         this.props.dispatch(contractorActions.deleteContractor(index));
-    },
+    }
 
-    handleAddButtonClick: function () {
+    handleAddButtonClick() {
         //console.log('handleAddButtonClick');
-    },
+    }
 
     /**
      * -- Lifecycle methods --
      */
 
-    componentDidMount: function() {
+    componentDidMount() {
         this.props.dispatch(contractorActions.listenForFirebaseChanges());
-    },
+    }
 
-    render: function () {
+    render() {
         /**
          * `this.props` is injected by `connect` call.
          */
@@ -64,7 +70,7 @@ var Application = React.createClass({
         );
     }
 
-});
+}
 
 
 /**
@@ -80,4 +86,4 @@ function mapStateToProps(state) {
 /**
  * Wrap the component to inject dispatch and state into it.
  */
-module.exports = ReactRedux.connect(mapStateToProps)(Application);
+export default connect(mapStateToProps)(Application);;

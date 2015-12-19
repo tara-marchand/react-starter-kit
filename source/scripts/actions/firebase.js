@@ -1,5 +1,5 @@
-var Firebase = require('firebase');
-var FirebaseActionTypes = require('../constants/FirebaseActionTypes');
+import Firebase from 'firebase';
+import FirebaseActionTypes from '../constants/FirebaseActionTypes';
 
 var firebaseActions = {};
 
@@ -22,4 +22,4 @@ firebaseActions.receiveData = function (url) {
     }
 };
 
-module.exports = firebaseActions;
+export default firebaseActions;

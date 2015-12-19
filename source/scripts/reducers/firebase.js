@@ -1,6 +1,5 @@
-var objectAssign = require('object-assign');
-var Redux = require('redux');
-var FirebaseActionTypes = require('../constants/FirebaseActionTypes');
+import objectAssign from 'object-assign';
+import FirebaseActionTypes from '../constants/FirebaseActionTypes';
 
 function firebase(state = {}, action) {
 
@@ -22,4 +21,4 @@ function firebase(state = {}, action) {
 
 };
 
-module.exports = firebase;
+export default firebase;

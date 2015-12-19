@@ -1,22 +1,25 @@
-var React = require('react');
-var TextInput = require('./TextInput');
-var Button = require('./Button');
+import React from 'react';
+import TextInput from './TextInput';
+import Button from './Button';
 
-var AddEditContractor = React.createClass({
+class AddEditContractor extends React.Component {
+    constructor() {
+        super();
+        this.handleClick = this.handleClick.bind(this);
+    }
 
-    handleClick: function() {
+    handleClick() {
         return;
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div className="panel-footer">
                 <TextInput placeholder="New contractor name" />
-            <Button text="Add" onClick={this.props.handleAddButtonClick} />
+                <Button text="Add" onClick={this.props.handleAddButtonClick} />
             </div>
         );
     }
+}
 
-});
-
-module.exports = AddEditContractor;
+export default AddEditContractor;

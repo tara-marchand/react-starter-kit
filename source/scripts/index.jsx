@@ -1,7 +1,7 @@
-require('../styles/app.css'); // imports bootstrap
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Root = require('./containers/Root');
+import '../styles/app.css'; // imports bootstrap
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Root from './containers/Root';
 
 ReactDOM.render(
     <Root />,

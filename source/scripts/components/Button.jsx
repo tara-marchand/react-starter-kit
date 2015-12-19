@@ -1,16 +1,14 @@
-var React = require('react');
+import React from 'react';
 
-var Button = React.createClass({
-
-    propTypes: {
-        onClick: React.PropTypes.func.isRequired,
-        text: React.PropTypes.string.isRequired
-    },
-
-    render: function () {
+class Button extends React.Component {
+    render() {
         return <button onClick={this.props.onClick}>{this.props.text}</button>
     }
+}
 
-});
+Button.propTypes = {
+    onClick: React.PropTypes.func.isRequired,
+    text: React.PropTypes.string.isRequired
+};
 
-module.exports = Button;
+export default Button;
