@@ -2,7 +2,7 @@ import React from 'react';
 import TextInput from './TextInput';
 import Button from './Button';
 
-class AddEditContractor extends React.Component {
+class AddEditDoctor extends React.Component {
     constructor() {
         super();
         this.handleClick = this.handleClick.bind(this);
@@ -15,11 +15,11 @@ class AddEditContractor extends React.Component {
     render() {
         return (
             <div className="panel-footer">
-                <TextInput placeholder="New contractor name" />
+                <TextInput placeholder="New doctor name" />
                 <Button text="Add" onClick={this.props.handleAddButtonClick} />
             </div>
         );
     }
 }
 
-export default AddEditContractor;
+export default AddEditDoctor;

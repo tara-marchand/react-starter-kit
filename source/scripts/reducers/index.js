@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import firebase from './firebase';
-import contractors from './contractors';
+import doctors from './doctors';
 
 /**
  * Generates a function that calls reducers with the slices of state selected
@@ -8,7 +8,7 @@ import contractors from './contractors';
  */
 var rootReducer = combineReducers({
     firebase,
-    contractors
+    doctors
 });
 
 export default rootReducer;

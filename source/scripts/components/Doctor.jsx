@@ -1,15 +1,15 @@
 import React from 'react';
-import ContractorActions from '../actions/contractors';
+import DoctorActions from '../actions/doctors';
 import Button from './Button';
 
-class Contractor extends React.Component {
+class Doctor extends React.Component {
     render() {
         return <li className="list-group-item">
-            <a href={this.props.contractor.url}
+            <a href={this.props.doctor.url}
                 target="_blank"
                 onClick={this.props.handleNameClick}
-                className={this.props.contractor.viewState}>
-                    {this.props.contractor.name}
+                className={this.props.doctor.viewState}>
+                    {this.props.doctor.name}
             </a>
             <Button text="Delete"
                 onClick={this.props.handleDeleteButtonClick}
@@ -18,8 +18,8 @@ class Contractor extends React.Component {
     }
 }
 
-Contractor.propTypes = {
-    contractor: React.PropTypes.shape({
+Doctor.propTypes = {
+    doctor: React.PropTypes.shape({
         id: React.PropTypes.string.isRequired,
         name: React.PropTypes.string.isRequired,
         url: React.PropTypes.string,
@@ -27,8 +27,18 @@ Contractor.propTypes = {
     }).isRequired
 };
 
-Contractor.defaultProps = {
+Doctor.defaultProps = {
     viewState: 'display'
 };
 
-export default Contractor;
+/*
+ - photo
+ - name (Dr. Pragya Jain)
+ - dr. type (Internal Medicine)
+ - location name (Dignity Health Medical Group - Sequoia)
+ - location # and street (1660 San Carlos Ave)
+ - location city and zip (San Carlos, 94070)
+ - phone # ((650) 596-9085)
+ */
+
+export default Doctor;
