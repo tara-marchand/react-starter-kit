@@ -20,7 +20,7 @@ doctorActions.listenForFirebaseChanges = function() {
     return function (dispatch, getState) {
         var firebaseRef = new Firebase(urls.FIREBASE);
 
-        firebaseRef.child('doctors').on('value', function (snapshot) {
+        firebaseRef.on('value', function (snapshot) {
             dispatch(doctorActions.updateLocalState(snapshot.val()));
         });
     }
@@ -31,23 +31,9 @@ doctorActions.listenForFirebaseChanges = function() {
  */
 doctorActions.saveStateToFirebase = function(doctors) {
     return function (dispatch) {
-        new Firebase(urls.FIREBASE).child('doctors').set(doctors);
+        new Firebase(urls.FIREBASE).set(doctors);
         // no need for dispatch, it will trigger Firebase `value`, which will dispatch `updateLocalState`
     }
-};
-
-doctorActions.updateDoctorViewState = function(id) {
-    return {
-        type: DoctorActionTypes.UPDATE_DOCTOR_VIEW_STATE,
-        id: id
-    };
-};
-
-doctorActions.deleteDoctor = function(id) {
-    return {
-        type: DoctorActionTypes.DELETE_DOCTOR,
-        id: id
-    };
 };
 
 doctorActions.addDoctor = function(id) {
