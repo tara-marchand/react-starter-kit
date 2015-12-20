@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import firebaseActions from '../actions/firebase';
 import doctorActions from '../actions/doctors';
+import currentDoctorIndexActions from '../actions/currentDoctorIndex';
 import DoctorList from '../components/DoctorList';
 import AddEditDoctor from '../components/AddEditDoctor';
+import Map from '../components/Map';
 
 class Application extends React.Component {
     constructor() {
@@ -13,23 +15,16 @@ class Application extends React.Component {
     }
 
     /**
-     * -- Event handlers --
-     */
-
-    /**
      * Value for index is passed from grandchild: Doctor -> DoctorList -> App
      */
-    handleNameClick(id, e) {
+    handleNameClick(index, e) {
         e.preventDefault();
+        this.props.dispatch(currentDoctorIndexActions.setIndex(index));
     }
 
     handleAddButtonClick() {
         //console.log('handleAddButtonClick');
     }
-
-    /**
-     * -- Lifecycle methods --
-     */
 
     componentDidMount() {
         this.props.dispatch(doctorActions.listenForFirebaseChanges());
@@ -47,11 +42,17 @@ class Application extends React.Component {
                     <div className='col-md-12'>
                         <div className='panel panel-default'>
                             <div className='panel-heading'>Doctors!</div>
+
                             <DoctorList doctors={this.props.doctors}
                                 firebase={this.props.firebase}
                                 handleNameClick={this.handleNameClick}
                             />
-                        <AddEditDoctor handleAddButtonClick={this.handleAddButtonClick} />
+
+                            <Map currentDoctorIndex={this.props.currentDoctorIndex}
+                                doctors={this.props.doctors}
+                            />
+
+                            <AddEditDoctor handleAddButtonClick={this.handleAddButtonClick} />
                         </div>
                     </div>
                 </div>
@@ -61,6 +62,9 @@ class Application extends React.Component {
 
 }
 
+Application.defaultProps = {
+    currentDoctorIndex: -1
+};
 
 /**
  * Which props do we want to inject?

@@ -1,6 +1,7 @@
 import React from 'react';
 import DoctorActions from '../actions/doctors';
 import Button from './Button';
+import Map from './Map';
 
 class Doctor extends React.Component {
     render() {
