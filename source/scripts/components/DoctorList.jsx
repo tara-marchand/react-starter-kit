@@ -11,16 +11,13 @@ class DoctorList extends React.Component {
             var doctorsMarkup = [];
             var spinnerMarkup = '';
 
-            for (var id in this.props.doctors) {
-                if (this.props.doctors.hasOwnProperty(id)) {
-                    var doctor = this.props.doctors[id];
+            for (var i in this.props.doctors) {
+                var doctor = this.props.doctors[i];
 
-                    doctorsMarkup.push(<Doctor key={id}
-                        doctor={doctor}
-                        handleNameClick={this.props.handleNameClick.bind(null, id)}
-                        handleDeleteButtonClick={this.props.handleDeleteButtonClick.bind(null, id)}
-                    />);
-                }
+                doctorsMarkup.push(<Doctor key={i}
+                    doctor={doctor}
+                    handleNameClick={this.props.handleNameClick.bind(null, i)}
+                />);
             }
 
             if (this.props.firebase.isFetching) {

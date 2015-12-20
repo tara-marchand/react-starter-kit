@@ -9,7 +9,6 @@ class Application extends React.Component {
     constructor() {
         super();
         this.handleNameClick = this.handleNameClick.bind(this);
-        this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
         this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
     }
 
@@ -22,15 +21,6 @@ class Application extends React.Component {
      */
     handleNameClick(id, e) {
         e.preventDefault();
-        this.props.dispatch(doctorActions.updateDoctorViewState(id));
-    }
-
-    /**
-     * Value for index is passed from grandchild: Doctor -> DoctorList -> App
-     */
-    handleDeleteButtonClick(index, e) {
-        e.preventDefault();
-        this.props.dispatch(doctorActions.deleteDoctor(index));
     }
 
     handleAddButtonClick() {
@@ -60,7 +50,6 @@ class Application extends React.Component {
                             <DoctorList doctors={this.props.doctors}
                                 firebase={this.props.firebase}
                                 handleNameClick={this.handleNameClick}
-                                handleDeleteButtonClick={this.handleDeleteButtonClick}
                             />
                         <AddEditDoctor handleAddButtonClick={this.handleAddButtonClick} />
                         </div>

@@ -3,15 +3,20 @@ import Thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
 /**
- * Create a store that has redux-thunk middleware enabled.
- */
-var createStoreWithMiddleware = applyMiddleware(
-    Thunk
-)(createStore);
+* Create a store that has redux-thunk middleware enabled.
+*/
+var createStoreWithMiddleware = applyMiddleware(Thunk)(createStore);
 
+export default function configureStore(initialState) {
+    const store = createStoreWithMiddleware(rootReducer, initialState);
 
-function configureStore(initialState) {
-    return createStoreWithMiddleware(rootReducer, initialState);
-};
+    if (module.hot) {
+        // Enable Webpack hot module replacement for reducers
+        module.hot.accept('./reducers', () => {
+            const nextRootReducer = require('./reducers/index');
+            store.replaceReducer(nextRootReducer);
+        });
+    }
 
-export default configureStore;
+    return store;
+}

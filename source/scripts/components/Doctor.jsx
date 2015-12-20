@@ -5,40 +5,30 @@ import Button from './Button';
 class Doctor extends React.Component {
     render() {
         return <li className="list-group-item">
-            <a href={this.props.doctor.url}
+            <a href="#"
                 target="_blank"
-                onClick={this.props.handleNameClick}
-                className={this.props.doctor.viewState}>
+                onClick={this.props.handleNameClick}>
                     {this.props.doctor.name}
             </a>
-            <Button text="Delete"
-                onClick={this.props.handleDeleteButtonClick}
-            />
         </li>
     }
 }
 
 Doctor.propTypes = {
     doctor: React.PropTypes.shape({
-        id: React.PropTypes.string.isRequired,
+        photo: React.PropTypes.string.isRequired,
         name: React.PropTypes.string.isRequired,
-        url: React.PropTypes.string,
-        viewState: React.PropTypes.oneOf(['display', 'edit', 'add'])
+        speciality: React.PropTypes.string.isRequired,
+        location: React.PropTypes.shape({
+            name: React.PropTypes.string.isRequired,
+            address: React.PropTypes.string.isRequired,
+            city: React.PropTypes.string.isRequired,
+            state: React.PropTypes.string.isRequired,
+            zip: React.PropTypes.string.isRequired,
+            geoLat: React.PropTypes.string.isRequired,
+            geoLong: React.PropTypes.string.isRequired
+        }).isRequired
     }).isRequired
 };
-
-Doctor.defaultProps = {
-    viewState: 'display'
-};
-
-/*
- - photo
- - name (Dr. Pragya Jain)
- - dr. type (Internal Medicine)
- - location name (Dignity Health Medical Group - Sequoia)
- - location # and street (1660 San Carlos Ave)
- - location city and zip (San Carlos, 94070)
- - phone # ((650) 596-9085)
- */
 
 export default Doctor;
