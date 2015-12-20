@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import firebase from './firebase';
 import doctors from './doctors';
+import currentDoctorIndex from './currentDoctorIndex';
 
 /**
  * Generates a function that calls reducers with the slices of state selected
@@ -8,7 +9,8 @@ import doctors from './doctors';
  */
 var rootReducer = combineReducers({
     firebase,
-    doctors
+    doctors,
+    currentDoctorIndex
 });
 
 export default rootReducer;

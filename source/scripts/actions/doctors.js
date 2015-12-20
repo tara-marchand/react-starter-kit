@@ -43,4 +43,14 @@ doctorActions.addDoctor = function(id) {
     };
 };
 
+/**
+ * Store index of current doctor.
+ */
+doctorActions.setCurrentDoctorIndex = function(index) {
+    return {
+        type: DoctorActionTypes.SET_CURRENT_INDEX,
+        index: index
+    };
+};
+
 export default doctorActions;
