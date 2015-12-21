@@ -7,6 +7,8 @@ import DoctorList from '../components/DoctorList';
 import AddEditDoctor from '../components/AddEditDoctor';
 import Map from '../components/Map';
 import DoctorDetails from '../components/DoctorDetails';
+import SpotifyIframePlayer from '../components/SpotifyIframePlayer';
+import SpotifyCustomPlaylist from '../components/SpotifyCustomPlaylist';
 
 class Application extends React.Component {
     constructor() {
@@ -63,6 +65,14 @@ class Application extends React.Component {
                             />
 
                         </div>
+
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-12">
+
+                        <SpotifyIframePlayer username="stonefruit" playlist="44GFzXAWiELxQLZz8UAout" view="list" theme="white" width="420" height="500" />
+                        <SpotifyCustomPlaylist username="stonefruit" playlist="44GFzXAWiELxQLZz8UAout" />
 
                     </div>
                 </div>
