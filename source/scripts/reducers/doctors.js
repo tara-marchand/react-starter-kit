@@ -1,8 +1,5 @@
-import _ from 'lodash';
 import objectAssign from 'object-assign';
-import Redux from 'redux';
 import DoctorActionTypes from '../constants/DoctorActionTypes';
-import urls from '../constants/ApiUrls';
 
 function doctors(state = {}, action) {
 

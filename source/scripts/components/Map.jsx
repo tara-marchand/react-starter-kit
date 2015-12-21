@@ -1,6 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import L from 'leaflet';
 import './../../../node_modules/leaflet/dist/leaflet.css';
+
+// https://github.com/ryanflorence/react-training/blob/gh-pages/lessons/05-wrapping-dom-libs.md
 
 class Map extends React.Component {
     constructor() {
@@ -9,23 +12,42 @@ class Map extends React.Component {
         this.updateMap = this.updateMap.bind(this);
     }
 
+    componentDidMount() {
+        var node = ReactDOM.findDOMNode(this);
+
+        L.Icon.Default.imagePath = './../../../node_modules/leaflet/src/images/marker.svg';
+        this.map = L.map(node);
+        new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            minZoom: 8,
+            maxZoom: 12,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        }).addTo(this.map);
+
+        // start the map in South-East England
+        this.map = ReactDOM.render(LeafletMap, node);
+        this.map.setView(new L.LatLng(51.3, 0.7), 9);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        // if (this.props.currentDoctorIndex === -1) {
+        //     return;
+        // }
+        //
+        // var lat = parseFloat(this.props.doctors[this.props.currentDoctorIndex].location.geoLat);
+        // var long = parseFloat(this.props.doctors[this.props.currentDoctorIndex].location.geoLong);
+        //
+        // this.map.panTo([lat, long]);
+    }
+
     render() {
-        return <div id="map">{this.props.currentDoctorIndex}</div>;
+        return <div className="map"></div>;
     }
 
     updateMap() {
-        this.map = L.map('map');
-        this.map.setView([
-            this.props.doctors[this.props.currentDoctorIndex],
-            this.props.doctors[this.props.currentDoctorIndex]
-            ],
-        13);
-    }
 
-    componentDidMount() {
-        if (this.props.currentDoctorIndex > -1) {
-            // this.updateMap();
-        }
+        // L.marker([51.5, -0.09]).addTo(this.map)
+        //     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        //     .openPopup();
     }
 }
 

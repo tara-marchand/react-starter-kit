@@ -9,7 +9,11 @@ import App from './App';
  * Calls method to create store with initial state, with reducers
  * already passed in.
  */
-var store = configureStore();
+var store = configureStore({
+    firebase: {},
+    doctors: {},
+    currentDoctorIndex: -1
+});
 
 class Root extends React.Component {
     render() {
