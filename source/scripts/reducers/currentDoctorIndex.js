@@ -2,7 +2,8 @@ import objectAssign from 'object-assign';
 import Redux from 'redux';
 import CurrentDoctorIndexActionTypes from '../constants/CurrentDoctorIndexActionTypes';
 
-function currentDoctorIndex(state = {}, action) {
+function currentDoctorIndex(state = -1, action) {
+
     switch (action.type) {
 
         case CurrentDoctorIndexActionTypes.SET_CURRENT_INDEX:

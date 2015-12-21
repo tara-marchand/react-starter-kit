@@ -62,17 +62,14 @@ class Application extends React.Component {
 
 }
 
-Application.defaultProps = {
-    currentDoctorIndex: -1
-};
-
 /**
  * Which props do we want to inject?
  */
 function mapStateToProps(state) {
     return {
         doctors: state.doctors,
-        firebase: state.firebase
+        firebase: state.firebase,
+        currentDoctorIndex: state.currentDoctorIndex
     };
 }
 
