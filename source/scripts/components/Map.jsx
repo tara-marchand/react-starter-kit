@@ -24,7 +24,7 @@ class Map extends React.Component {
         }).addTo(this.map);
 
         // start the map in southeast England
-        this.map.setView(new L.LatLng(51.3, 0.7), 0);
+        this.map.setView([51.3, 0.7], 1);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -33,7 +33,7 @@ class Map extends React.Component {
             var lat = parseFloat(doctorLocation.geoLat);
             var long = parseFloat(doctorLocation.geoLong);
 
-            this.map.panTo([lat, long]);
+            this.map.setView([lat, long]);
         }
     }
 
