@@ -23,20 +23,18 @@ class Map extends React.Component {
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         }).addTo(this.map);
 
-        // start the map in South-East England
-        this.map = ReactDOM.render(LeafletMap, node);
-        this.map.setView(new L.LatLng(51.3, 0.7), 9);
+        // start the map in southeast England
+        this.map.setView(new L.LatLng(51.3, 0.7), 0);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // if (this.props.currentDoctorIndex === -1) {
-        //     return;
-        // }
-        //
-        // var lat = parseFloat(this.props.doctors[this.props.currentDoctorIndex].location.geoLat);
-        // var long = parseFloat(this.props.doctors[this.props.currentDoctorIndex].location.geoLong);
-        //
-        // this.map.panTo([lat, long]);
+        if (this.props.currentDoctorIndex > -1) {
+            var doctorLocation = this.props.doctors[this.props.currentDoctorIndex].location;
+            var lat = parseFloat(doctorLocation.geoLat);
+            var long = parseFloat(doctorLocation.geoLong);
+
+            this.map.panTo([lat, long]);
+        }
     }
 
     render() {
