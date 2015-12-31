@@ -6,28 +6,25 @@ import TweenLite from 'gsap';
 
 class Doctor extends React.Component {
     render() {
-        return <li className="list-group-item">
-            <a href="#"
-                target="_blank"
-                onClick={this.props.handleNameClick}
-                onMouseOver={this.handleMouseOver}
-                onMouseOut={this.handleMouseOut}>
-                    {this.props.doctor.name}
-            </a>
-        </li>
+        return <a href="#"
+            className="list-group-item"
+            target="_blank"
+            onClick={this.props.handleNameClick}
+            onMouseOver={this.handleMouseOver}
+            onMouseOut={this.handleMouseOut}>
+                {this.props.doctor.name}
+        </a>
     }
 
     handleMouseOver(e) {
         var tween = TweenLite.to(e.target, .5, {
-            color: 'red',
             opacity: .5
         });
     }
 
     handleMouseOut(e) {
         var tween = TweenLite.to(e.target, .5, {
-            opacity: 1,
-            clearProps: 'color'
+            opacity: 1
         });
     }
 }

@@ -26,11 +26,11 @@ class DoctorList extends React.Component {
                 spinnerMarkup = '';
             }
 
-            return <div className="panel-body">
+            return <div>
                 {spinnerMarkup}
-                <ul className="list-group doctor-list">
+                <div className="list-group doctor-list">
                     {doctorsMarkup}
-                </ul>
+                </div>
             </div>
        }
     }

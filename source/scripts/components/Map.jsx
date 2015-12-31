@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import L from 'leaflet';
+import classNames from 'classnames';
 import './../../../node_modules/leaflet/dist/leaflet.css';
 
 // https://github.com/ryanflorence/react-training/blob/gh-pages/lessons/05-wrapping-dom-libs.md
@@ -38,7 +39,14 @@ class Map extends React.Component {
     }
 
     render() {
-        return <div className="map"></div>;
+        var hasMapClassName = this.props.mapClassName && this.props.mapClassName.length;
+        var mapClassName = (hasMapClassName) ? this.props.mapClassName : '';
+        var mapClassNames = classNames({
+            'map': true,
+            [mapClassName]: hasMapClassName
+        });
+
+        return <div className={mapClassNames}></div>;
     }
 
     updateMap() {
@@ -50,6 +58,8 @@ class Map extends React.Component {
 }
 
 Map.propTypes = {
+    currentDoctorIndex: React.PropTypes.number,
+    mapClassName: React.PropTypes.string
 };
 
 export default Map;
