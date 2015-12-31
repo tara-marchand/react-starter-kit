@@ -6,6 +6,7 @@ import currentDoctorIndexActions from '../actions/currentDoctorIndex';
 import DoctorList from '../components/DoctorList';
 import AddEditDoctor from '../components/AddEditDoctor';
 import Map from '../components/Map';
+import DoctorDetails from '../components/DoctorDetails';
 
 class Application extends React.Component {
     constructor() {
@@ -37,23 +38,32 @@ class Application extends React.Component {
         var dispatch = this.props.dispatch;
 
         return (
-            <div className='container-fluid'>
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <div className='panel panel-default'>
-                            <div className='panel-heading'>Doctors!</div>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-8">
 
-                            <DoctorList doctors={this.props.doctors}
-                                firebase={this.props.firebase}
-                                handleNameClick={this.handleNameClick}
-                            />
+                        <DoctorList doctors={this.props.doctors}
+                            firebase={this.props.firebase}
+                            handleNameClick={this.handleNameClick}
+                        />
 
-                            <Map currentDoctorIndex={this.props.currentDoctorIndex}
+                    </div>
+                    <div className="col-md-4">
+
+                        <div className="list-group">
+
+                            <Map mapClassName="list-group-item"
+                                currentDoctorIndex={this.props.currentDoctorIndex}
                                 doctors={this.props.doctors}
                             />
 
-                            <AddEditDoctor handleAddButtonClick={this.handleAddButtonClick} />
+                            <DoctorDetails
+                                currentDoctorIndex={this.props.currentDoctorIndex}
+                                doctors={this.props.doctors}
+                            />
+
                         </div>
+
                     </div>
                 </div>
             </div>
