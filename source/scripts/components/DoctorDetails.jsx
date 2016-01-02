@@ -16,10 +16,6 @@ class DoctorDetails extends React.Component {
         };
     }
 
-    getCurrentDoctor() {
-        return this.props.doctors[this.props.currentDoctorIndexDoctor];
-    }
-
     shouldComponentUpdate(nextProps, nextState) {
         return nextProps.currentDoctorIndex !== this.props.currentDoctorIndex;
     }
