@@ -9,32 +9,51 @@ import './../../../node_modules/leaflet/dist/leaflet.css';
 class Map extends React.Component {
     constructor() {
         super();
+        // defaults
         this.map = null;
-        this.updateMap = this.updateMap.bind(this);
+        this.icon = L.divIcon({
+            iconSize: new L.Point(25, 41)
+        });
+        this.currentDoctor = {
+            name: '',
+            location: {
+                name: '',
+                address: '',
+                city: '',
+                state: '',
+                zip: '',
+                geoLat: 51.3,
+                geoLong: 0.7
+            }
+        };
+
+        this.updateMapView = this.updateMapView.bind(this);
     }
 
     componentDidMount() {
         var node = ReactDOM.findDOMNode(this);
 
-        L.Icon.Default.imagePath = './../../../node_modules/leaflet/src/images/marker.svg';
+        L.Icon.Default.imagePath = './../../../node_modules/leaflet/dist/images';
         this.map = L.map(node);
+        this.map.setView([ this.currentDoctor.location.geoLat, this.currentDoctor.location.geoLong ], 1);
         new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             minZoom: 8,
             maxZoom: 12,
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         }).addTo(this.map);
+    }
 
-        // start the map in southeast England
-        this.map.setView([51.3, 0.7], 1);
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.currentDoctorIndex !== this.props.currentDoctorIndex;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        this.currentDoctor = nextProps.doctors[nextProps.currentDoctorIndex];
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (this.props.currentDoctorIndex > -1) {
-            var doctorLocation = this.props.doctors[this.props.currentDoctorIndex].location;
-            var lat = parseFloat(doctorLocation.geoLat);
-            var long = parseFloat(doctorLocation.geoLong);
-
-            this.map.setView([lat, long]);
+            this.updateMapView();
         }
     }
 
@@ -49,11 +68,17 @@ class Map extends React.Component {
         return <div className={mapClassNames}></div>;
     }
 
-    updateMap() {
+    updateMapView() {
+        var latLong = [
+            this.currentDoctor.location.geoLat,
+            this.currentDoctor.location.geoLong
+        ];
 
-        // L.marker([51.5, -0.09]).addTo(this.map)
-        //     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        //     .openPopup();
+        this.map.panTo(latLong);
+        L.marker(latLong, { icon: this.icon })
+            .addTo(this.map)
+            .bindPopup(this.currentDoctor.name)
+            .openPopup();
     }
 }
 
