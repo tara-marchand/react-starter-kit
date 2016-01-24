@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpackEnv = require('webpack-env');
 
 module.exports = {
 
@@ -31,6 +32,7 @@ module.exports = {
                 'NODE_ENV': JSON.stringify('production')
             }
         }),
+        webpackEnv,
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 warnings: false

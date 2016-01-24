@@ -1,7 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpackEnv = require('webpack-env');
 
 module.exports = {
 
@@ -33,6 +34,7 @@ module.exports = {
         //     publicPath: '/styles/',
         //     allChunks: true
         // }),
+        webpackEnv,
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'source/index.html',
